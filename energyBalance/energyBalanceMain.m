@@ -8,10 +8,10 @@
   clear
   clc
 % ---------- Constantes de tipo global ------------------------------------
-  g = globalData();
-  NoN = (1:g.n*g.Num_esp);
+     Global = globalData();
+        NoN = (1:Global.n*Global.Num_esp);
 % ---------- initial condition --------------------------------------------
-    u0 = inicial;
+         u0 = initialConditions(Global);
 % ---------- time simulation (s) ------------------------------------------
     t0 = 0.0; 
     tf = 3600*1000; 

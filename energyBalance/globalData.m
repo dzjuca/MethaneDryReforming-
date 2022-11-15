@@ -9,7 +9,7 @@ function Global = globalData()
       Global.g = 981.0;               % Gravity                     [cm/s2]
       Global.Tref = (475.0 + 273.15); % reference temperature           [K]
       Global.Tc   = (512.5 + 273.15); % reference temperature           [K]
-      Global.Num_esp = 14;            % number of species               [#]
+      Global.Num_esp = 16;            % number of species               [#]
 % ----------| Flow rate and concentration of species |---------------------
 % ----- total feed flow in the reactor's bottom ---------------------------
       Global.QT_in = 247.5;           %                        [STP ml/min]
@@ -53,8 +53,10 @@ function Global = globalData()
 % ---------- reactor constant data  ---------------------------------------
       Global.Di = 2.7;     % the internal diameter of the reactor      [cm]
       Global.zl = 6.0;     % reaction zone height                      [cm]
-      Global.zg = linspace(0,zl,n)';  % height for each mesh point     [cm]
-      Global.A  = pi*(Di/2)^2;        % cross-sectional area          [cm2]
+      Global.zg = linspace(0, ...
+                  Global.zl,  ...
+                  Global.n)';  % height for each mesh point            [cm]
+      Global.A  = pi*(Global.Di/2)^2; % cross-sectional area          [cm2]
 % ---------- catalyst constant data ---------------------------------------
       Global.W     = 30.000;   % catalyst weight                        [g]
       Global.WIn   = 67.500;   % inert weight                           [g]
@@ -66,7 +68,8 @@ function Global = globalData()
       Global.fw  = 0.15;          % fraction of wake in bubbles         [ ]
       Global.Emf = 0.45;          % minimum fluidization porosity       [ ]
 % ---------- fluid constant data ------------------------------------------
-      Global.usg0 = QT_in./(A*60.0);  % Velocidad de flujo inicial   [cm/s]
+      Global.usg0 = ...
+                  Global.QT_in./(Global.A*60.0);% Initial Flow Rate  [cm/s]
 % ---------- kinetic constants - pre-exponential factor -------------------
       k1o = (10.87270/3600);      % - DRM                      [mol/gcat.s]
       k2o = (716.0353/3600);      % - WGSR                     [mol/gcat.s]
@@ -106,22 +109,22 @@ function Global = globalData()
       EaKAD2 = (572.8522000);%                                     [kJ/mol]
       EaKAD3 = (570.9836000);%                                     [kJ/mol]
 % ---------- kinetic constants calculate  ---------------------------------
-      Global.k1   =   k1o*exp((-Ea1/R)  *((1/T)-(1/Tc)));
-      Global.k2   =   k2o*exp((-Ea2/R)  *((1/T)-(1/Tc)));
-      Global.k3   =   k3o*exp((-Ea3/R)  *((1/T)-(1/Tc)));
-      Global.KCH4 = KCH4o*exp((EaKCH4/R)*((1/T)-(1/Tc)));
-      Global.KCO2 = KCO2o*exp((EaKCO2/R)*((1/T)-(1/Tc)));
-      Global.KH2  =  KH2o*exp((EaKH2/R) *((1/T)-(1/Tc)));
-      Global.KP1  =  KP1o*exp((-EaKP1/R)*((1/T)-(1/Tc)));
-      Global.KP2  =  KP2o*exp((-EaKP2/R)*((1/T)-(1/Tc))); 
-      Global.KP3  =  KP3o*exp((-EaKP3/R)*((1/T)-(1/Tc)));
+  Global.k1   =   k1o*exp((-Ea1/Global.R)  *((1/Global.T)-(1/Global.Tc)));
+  Global.k2   =   k2o*exp((-Ea2/Global.R)  *((1/Global.T)-(1/Global.Tc)));
+  Global.k3   =   k3o*exp((-Ea3/Global.R)  *((1/Global.T)-(1/Global.Tc)));
+  Global.KCH4 = KCH4o*exp((EaKCH4/Global.R)*((1/Global.T)-(1/Global.Tc)));
+  Global.KCO2 = KCO2o*exp((EaKCO2/Global.R)*((1/Global.T)-(1/Global.Tc)));
+  Global.KH2  =  KH2o*exp((EaKH2/Global.R) *((1/Global.T)-(1/Global.Tc)));
+  Global.KP1  =  KP1o*exp((-EaKP1/Global.R)*((1/Global.T)-(1/Global.Tc)));
+  Global.KP2  =  KP2o*exp((-EaKP2/Global.R)*((1/Global.T)-(1/Global.Tc))); 
+  Global.KP3  =  KP3o*exp((-EaKP3/Global.R)*((1/Global.T)-(1/Global.Tc)));
 % ----------- deactivation constants calculate ----------------------------        
-      Global.KD1  = KD1o*exp((-EaKD1/R) *((1/T)-(1/Tc)));
-      Global.KD2  = KD2o*exp((-EaKD2/R) *((1/T)-(1/Tc)));
-      Global.KR1  = KR1o*exp((-EaKR1/R) *((1/T)-(1/Tc)));
-      Global.KAD1 = KAD1o*exp((EaKAD1/R)*((1/T)-(1/Tc)));
-      Global.KAD2 = KAD2o*exp((EaKAD2/R)*((1/T)-(1/Tc)));
-      Global.KAD3 = KAD3o*exp((EaKAD3/R)*((1/T)-(1/Tc)));
+  Global.KD1  = KD1o*exp((-EaKD1/Global.R) *((1/Global.T)-(1/Global.Tc)));
+  Global.KD2  = KD2o*exp((-EaKD2/Global.R) *((1/Global.T)-(1/Global.Tc)));
+  Global.KR1  = KR1o*exp((-EaKR1/Global.R) *((1/Global.T)-(1/Global.Tc)));
+  Global.KAD1 = KAD1o*exp((EaKAD1/Global.R)*((1/Global.T)-(1/Global.Tc)));
+  Global.KAD2 = KAD2o*exp((EaKAD2/Global.R)*((1/Global.T)-(1/Global.Tc)));
+  Global.KAD3 = KAD3o*exp((EaKAD3/Global.R)*((1/Global.T)-(1/Global.Tc)));
 % ---------- molar mass for each specie -----------------------------------
       Global.MMASS(1) = 16.0426;      % - CH4                       [g/mol]
       Global.MMASS(2) = 44.0090;      % - CO2                       [g/mol]
