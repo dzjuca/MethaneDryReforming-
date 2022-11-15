@@ -1,0 +1,5 @@
+function g = globalData()
+
+    
+
+end
