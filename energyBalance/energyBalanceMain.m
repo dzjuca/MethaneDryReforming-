@@ -1,12 +1,12 @@
-% ----------------- SIMULACION - REACTOR LECHO FLUIDIZADO -----------------
+% ----------------- SIMULACI�N - REACTOR LECHO FLUIDIZADO -----------------
 %                      REFORMADO SECO DE METANO (DRM)
-% Proyecto BioRefinEr - Laboratorio de Reactores Quimicos - CREG - I3A 
+% Proyecto BioRefinEr - Laboratorio de Reactores Qu�micos - CREG - I3A 
 %     Daniel Z. Juca  - Estudiante de Doctorado
-%     Miguel Menendez - Director
+%     Miguel Men�ndez - Director
 %     Jaime Soler     - Co-director
 % ------------------------ | INICIO RLF.m | -------------------------------
   close all
-  clear all
+  clear;
   clc
 % ---------- Constantes de tipo global ------------------------------------
   global ncall n Num_esp
@@ -14,11 +14,11 @@
   NoN = (1:n*Num_esp);
 % ---------- Inicio de constantes iniciales -------------------------------
     u0 = inicial;
-% ---------- tiempo de simulacion (s) -------------------------------------
+% ---------- tiempo de simulaci�n (s) -------------------------------------
     t0 = 0.0; 
-    tf = 3600*4; 
+    tf = 3600*1000; 
   tout = linspace(t0,tf,100)';
-% ---------- Integracion Ecuaciones Diferenciales Ordianarias (ODEs) ------ 
+% ---------- Integraci�n Ecuaciones Diferenciales Ordianarias (ODEs) ------ 
   reltol = 1.0e-6; abstol = 1.0e-6;  
  options = odeset('RelTol',reltol,'AbsTol',abstol,'NonNegative',NoN);
 % ---------- Implicit (sparse stiff) integration --------------------------
