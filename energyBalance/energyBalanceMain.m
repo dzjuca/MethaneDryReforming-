@@ -8,9 +8,8 @@
   clear
   clc
 % ---------- Constantes de tipo global ------------------------------------
-  global ncall n Num_esp
-           constantesFBR
-  NoN = (1:n*Num_esp);
+  g = globalData();
+  NoN = (1:g.n*g.Num_esp);
 % ---------- initial condition --------------------------------------------
     u0 = inicial;
 % ---------- time simulation (s) ------------------------------------------
@@ -25,5 +24,4 @@
     [t,u] = ode15s(@pdeDRM,tout,u0,options);  
 % ---------- Salidas ------------------------------------------------------
   [T_b,T_e,T] = SkinFcnMac(t,u);
-   fprintf('\n ncall = %4d\n',ncall);
 % ---------------------------| End Program |-------------------------------
