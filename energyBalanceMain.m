@@ -7,7 +7,7 @@
   close all
   clear
   clc
-% ---------- Constantes de tipo global ------------------------------------
+% ---------- global constants ---------------------------------------------
      Global = globalData();
         NoN = (1:Global.n*Global.Num_esp);
 % ---------- initial condition --------------------------------------------
@@ -19,9 +19,10 @@
 % ---------- Implicit (sparse stiff) integration --------------------------
    reltol = 1.0e-6; abstol = 1.0e-6;  
   options = odeset('RelTol',reltol,'AbsTol',abstol,'NonNegative',NoN);
-        S = JPatternDRM;
-  options = odeset(options,'JPattern',S); 
-    [t,u] = ode15s(@pdeDRM,tout,u0,options);  
+%       S = JPatternFcn(Global);
+%  options = odeset(options,'JPattern',S); 
+   pdeDRM = @(t,u)pdeFcn(t,u,Global);
+    [t,u] = ode15s(pdeDRM,tout,u0,options);  
 % ---------- Salidas ------------------------------------------------------
   [T_b,T_e,T] = SkinFcnMac(t,u);
 % ---------------------------| End Program |-------------------------------
