@@ -1,29 +1,36 @@
-function [ub,db,us,ue,alpha]= ubFcn
-% Función ubFcn.m permite el cáculo del diámetro y velocidad de burbuja en 
-% función de la altura del reactor(z).
+function [ub,db,us,ue,alpha]= ubFcn(Global)
+% Funciï¿½n ubFcn.m permite el cï¿½culo del diï¿½metro y velocidad de burbuja en 
+% funciï¿½n de la altura del reactor(z).
 % ----------------------------| ENTRADAS |---------------------------------
 %     usg0 = velocidad del gas reactante                    [cm/s]
-%      umf = velocidad mínima de fluidización               [cm/s]
-%        g = aceleración de la gravedad                     [cm/s2]
-%       Di = Diámetro interno del reactor                   [cm]
+%      umf = velocidad mï¿½nima de fluidizaciï¿½n               [cm/s]
+%        g = aceleraciï¿½n de la gravedad                     [cm/s2]
+%       Di = Diï¿½metro interno del reactor                   [cm]
 %       zg = Valores del mallado del reactor                [cm]
-%       fw = Fracción de la burbuja ocupada por la estela   [  ]
-%      Emf = Porosidad mínima de fluidización               [  ]
+%       fw = Fracciï¿½n de la burbuja ocupada por la estela   [  ]
+%      Emf = Porosidad mï¿½nima de fluidizaciï¿½n               [  ]
 % ----------------------------| SALIDAS |----------------------------------
 %       ub = vector - velocidad de ascenso de la burbuja           [cm/s]
-%       db = vector - diámetro de la burbuja                       [cm]
-%       us = vector - velocidad de descenso del solido (emulsión)  [cm/s]
-%       ue = vector - velocidad del gas en la emulsión             [cm/s]
-%    alpha = vector - fracción de burbujas en la fase densa        [  ]
+%       db = vector - diï¿½metro de la burbuja                       [cm]
+%       us = vector - velocidad de descenso del solido (emulsiï¿½n)  [cm/s]
+%       ue = vector - velocidad del gas en la emulsiï¿½n             [cm/s]
+%    alpha = vector - fracciï¿½n de burbujas en la fase densa        [  ]
 % -------------------------------------------------------------------------
-global usg0 umf g Di zg fw Emf
+    usg0 = Global.usg0;
+    umf  = Global.umf;
+    g    = Global.g;
+    Di   = Global.Di;
+    zg   = Global.zg;
+    fw   = Global.fw;
+    Emf  = Global.Emf;
+    
     db = zeros(length(zg),1); 
     ub = zeros(length(zg),1);
     us = zeros(length(zg),1);
     ue = zeros(length(zg),1);
  alpha = zeros(length(zg),1);
  index = length(zg);
-% ---------- Diámetro de burbuja ------------------------------------------  
+% ---------- Diï¿½metro de burbuja ------------------------------------------  
 %   dbo = (3.77*(usg0 - umf)^2)/g;   
     dbo = 0.02;
     dbm = 0.652*((pi/4)*(Di^2)*(usg0-umf))^(0.4);

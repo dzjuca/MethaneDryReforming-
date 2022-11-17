@@ -18,7 +18,6 @@ function ut = pdeFcn(t,u,Global)
     N2in    = Global.N2in;
     Num_esp = Global.Num_esp;
     Dcat    = Global.Dcat;
-    CcMax   = Global.CcMax;
 % ---------- Configuraci�n inicial de las variables -----------------------
     index1  = length(zg);
 % ---------- Eliminaci�n de concentraciones negativas ---------------------
@@ -59,12 +58,6 @@ function ut = pdeFcn(t,u,Global)
   for i = 1:(index1), u8b(i) = u(i+14*(index1));end % u7w = Cc  estela
   for i = 1:(index1), u8e(i) = u(i+15*(index1));end % u7e = Cc  emulsi�n
 % -------------------------------------------------------------------------
-%    if ncall > 435
-%        for i = 1:index1
-%           if u7w(i) > CcMax, u7w(i) = CcMax; end
-%           if u7e(i) > CcMax, u7e(i) = CcMax; end
-%        end
-%    end
 % ---------------------| CONDICIONES DE CONTORNO 1 |-----------------------
 % ---------- z = 0 --------------------------------------------------------
 % ---------- Fase Gas - Burbuja & Estela ----------------------------------
@@ -79,7 +72,7 @@ function ut = pdeFcn(t,u,Global)
 % ---------- Fase Gas - Burbuja & Estela ----------------------------------
    u7e(index1) = u7w(index1);
 % ---------- Llamado a la funci�n ubFcn.m ---------------------------------
-  [ub,db,us,ue,alpha] = ubFcn;    
+  [ub,db,us,ue,alpha] = ubFcn(Global);    
 % ---------- Concentraciones Totales --------------------------------------
   CTBW = [u1b,u2b,u3b,u4b,u5b,u6b,u7w];
    CTE = [u1e,u2e,u3e,u4e,u5e,u6e,u7e];
