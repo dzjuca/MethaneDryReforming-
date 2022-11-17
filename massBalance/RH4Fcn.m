@@ -21,19 +21,19 @@ function RH4 = RH4Fcn(alpha, CT, Global, caracter1, caracter2)
 
      if     strcmp(caracter1,'FGBurbuja')
             temporal = Dcat*(1-Emf)*fw*alpha;
-            cinetica = CineticaFcn(CT,caracter2);
+            cinetica = CineticaFcn(CT, Global, caracter2);
                  RH4 = temporal.*cinetica;
      elseif strcmp(caracter1,'FGEmulsion')
             temporal = Dcat*(1-alpha-alpha*fw)*(1-Emf);
-            cinetica = CineticaFcn(CT,caracter2);
+            cinetica = CineticaFcn(CT, Global, caracter2);
                  RH4 = temporal.*cinetica;
      elseif strcmp(caracter1,'FSEstela')
             temporal = Dcat*(1-Emf)*fw*alpha;                                   
-            cinetica = CineticaFcn(CT,caracter2);
+            cinetica = CineticaFcn(CT, Global, caracter2);
                  RH4 = temporal.*cinetica;
      elseif strcmp(caracter1,'FSEmulsion')
             temporal = Dcat*(1-Emf)*(1-alpha-alpha*fw);         
-            cinetica = CineticaFcn(CT,caracter2);
+            cinetica = CineticaFcn(CT, Global, caracter2);
                  RH4 = temporal.*cinetica; 
      else
             disp('Error - Ingresar un caracter correcto RH4Fcn.m')
