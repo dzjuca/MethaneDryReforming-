@@ -7,9 +7,7 @@ function u = initialConditions(Global)
     % ----------------------------| out |--------------------------------------
     %           u = initial conditions vector
     % -------------------------------------------------------------------------
-    global ncall
-
-        T0      = Global.T;    
+        T0      = Global.Tbed;    
         zg      = Global.zg;
         Num_esp = Global.Num_esp;
         n       = length(zg);
@@ -65,5 +63,4 @@ function u = initialConditions(Global)
     % ---------- u8b = Temperature Emulsion phase -----------------------------
         for i = 1:n, u8e(i) = T0;      u(i+15*n) = u8e(i);    end
     % ---------- N�mero de llamadas a la funci�n pdeDRM -----------------------
-        ncall = 0;
     end

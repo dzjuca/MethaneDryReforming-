@@ -6,9 +6,12 @@ function Global = globalData()
       Global.R = 8.314472e-3;         % Universal Gas Constant    [kJ/molK]    
       Global.P = 1.01325;             % Pressure                      [bar]   
       Global.T = 525.0 + 273.15;      % Temperature                     [K]
-      Global.g = 981.0;               % Gravity                     [cm/s2]
-      Global.Tref = (475.0 + 273.15); % reference temperature           [K]
-      Global.Tc   = (512.5 + 273.15); % reference temperature           [K]
+      Global.Tinlet  = 525.0 + 273.15; % Temperature                    [K]
+      Global.Twall   = 525.0 + 273.15; % Temperature                    [K]
+      Global.Tbed    = 525.0 + 273.15; % Temperature                    [K]
+      Global.g       = 981.0;          % Gravity                    [cm/s2]
+      Global.Tref    = (475.0 + 273.15); % reference temperature        [K]
+      Global.Tc      = (512.5 + 273.15); % reference temperature        [K]
       Global.Num_esp = 16;            % number of species               [#]
 % ----------| Flow rate and concentration of species |---------------------
 % ----- total feed flow in the reactor's bottom ---------------------------
