@@ -1,10 +1,10 @@
 function RH2 = RH2Fcn(alpha,ub,CiBW,CiE,Global,caracter)
 % -------------------------------------------------------------------------
-   % RH1Fcn - function allows to obtain the second term (Right Hand Side)
+   % RH2Fcn - function allows to obtain the second term (Right Hand Side)
    % of the mass balance model
    % ----------------------------| inlet |---------------------------------
    %    alpha = fraction of bubbles in bed                             f(z)
-   %       ub = bbubles velocity                                       f(z)
+   %       ub = bubbles velocity                                       f(z)
    %     CiBW = gas concentration - Burbuja & Estela  phases           f(z)
    %      CiE = gas concentration - Emulsion phase                     f(z)
    %   Global = constants structure

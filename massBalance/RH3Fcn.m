@@ -1,59 +1,80 @@
-function RH3 = RH3Fcn(alpha,db,ub,CiBW,CiE,CTBW,caracter1,caracter2)
-% Función RH3Fcn.M permite obtener un término auxiliar RH3 que es parte de
-% la ecuación principal de diseño del reactor TZFBR.
-% ----------------------------| ENTRADAS |---------------------------------
-%     alpha = fracción del lecho ocupado por las burbujas     f(z)
-%        db = diámetro de burbujas                            f(z)
-%        ub = vector - velocidad de ascenso de la burbuja     f(z) [cm/s]
-%      CiBW = Concentraciones en la Burbuja o Estela          f(z)
-%       CiE = Concentraciones en la Emulsión                  f(z)
-% caracter1 = Identificador de la Fase (Gas,Sólido)
-% caracter2 = Identificador del compuesto
-%      CTBW = Concentraciones de todos los gases (Burbuja o Estela)(vector)
-%       CTE = Concentraciones de todos los gases (Emulsión)        (vector)
-% ----------------------------| SALIDAS |----------------------------------
-%       RH3 = vector con el valor parcial de la ecuación de diseño
+function RH3 = RH3Fcn(alpha, db, ub, CiBW, CiE, CTBW, ...
+                      Global, caracter1, caracter2)
 % -------------------------------------------------------------------------
-global fw Emf zg Dcat
-     n = length(zg);
-      if    strcmp(caracter1,'FGas')
-             temporal = (alpha+alpha*fw*Emf).*(CiBW-CiE);
-                  KBE = KBEFcn(db,ub,CTBW,caracter2);
-                  RH3 = KBE.*temporal;
-     elseif strcmp(caracter1,'FSolido')
-             temporal = Dcat*alpha*fw*(1-Emf).*(CiBW-CiE);
-                  KWE = KWEFcn(db,n);
-                  RH3 = KWE.*temporal;
-     else
-            disp('Error - Ingresar un caracter correcto RH2Fcn.m')
-     end
+    % RH3Fcn - function allows to obtain the third term (Right Hand Side)
+    % of the mass balance model
+    % ----------------------------| inlet |--------------------------------
+    %     alpha = fraction of bubbles in bed                           f(z)
+    %        db = bubble diameter                                      f(z)
+    %        ub = bubbles velocity                              f(z) [cm/s]
+    %      CiBW = concentration (i species) bubble & wake phases       f(z)
+    %       CiE = concentration (i species) emulsion phases            f(z)
+    %      CTBW = a vector with all concentrations species - bubble & wake
+    %    Global = constants structure
+    % caracter1 = phase identifier (Gas,Solid)
+    % caracter2 = species identifier (CH4,CO2, ...)
+    % ----------------------------| outlet |-------------------------------
+    %       RH3 = right-hand side term-3
+% -------------------------------------------------------------------------
+    fw   = Global.fw;
+    Emf  = Global.Emf;
+    Dcat = Global.Dcat;
+
+    if    strcmp(caracter1,'FGas')
+            temporal = (alpha+alpha*fw*Emf).*(CiBW-CiE);
+                KBE = KBEFcn(db,ub,CTBW,Global,caracter2);
+                RH3 = KBE.*temporal;
+    elseif strcmp(caracter1,'FSolido')
+            temporal = Dcat*alpha*fw*(1-Emf).*(CiBW-CiE);
+                KWE = KWEFcn(db,Global);
+                RH3 = KWE.*temporal;
+    else
+        disp('Error - Ingresar un caracter correcto RH2Fcn.m')
+    end
+% -------------------------------------------------------------------------   
 end
-% ----------------------------| SUB-FUNCIÓN |------------------------------
-function KBE = KBEFcn(db,ub,CTBW,caracter2) 
-global zg SIGMA EK T P MMASS g umf Emf
-% ----------------------------| ENTRADAS |---------------------------------
-%        db = diámetro de burbujas                        f(z)       [cm]
-%        ub = velocidad de ascenso de la burbuja          f(z)     [cm/s]
-%      CTBW = Concentración - gases (Burbuja o Estela)    f(z)  [mol/cm3]
-% caracter2 = Identificador del compuesto
-%        zg = altura para cada punto del mallado          f(z)       [cm]
-%     SIGMA = Potenciales para cada compuesto - LENNARD-JONES         [A]
-%        EK =                                                         [K]
-%         T = Temperatura de reacción                                 [K]
-%         P = Presión                                               [bar]
-%     MMASS = Masa molar de los compuestos                        [g/mol]
-%         g = Aceleración de la gravedad                          [cm/s2]
-%       umf = Velocidad de fluidización mínima                     [cm/s]
-%       Emf = Porosidad del lecho a umf                               [ ]
-% ----------------------------| SALIDAS |----------------------------------
-%       KBE = coeficiente de intercambio entre burbuja & emulsión
+
 % -------------------------------------------------------------------------
-    MASS = MMASS(1:end-1);
-  index1 = length(EK);   % número de compuestos
-  index2 = length(zg);   % número de puntos del mallado en z
-     kbc = zeros(index2,1);
-     kce = zeros(index2,1);
-     KBE = zeros(index2,1);
+
+% ----------------------------| KBEFcn sub-function |----------------------
+function KBE = KBEFcn( db, ub ,CTBW ,Global ,caracter2 ) 
+% -------------------------------------------------------------------------
+    % KBEFcn - function allows to obtain the gas exchange coefficient 
+    % between bubble-emulsion [s-1]
+    % ----------------------------| inlet |--------------------------------
+    %        db = bubble diameter                                  f(z)[cm]
+    %        ub = bubbles velocity                              f(z) [cm/s]
+    %      CTBW = a vector with all concentrations species - bubble & wake
+    %    Global = constants structure
+    % caracter2 = species identifier (CH4,CO2, ...)
+    %        zg = height for each mesh point                       f(z)[cm]
+    %     SIGMA = Potentials for each compound - LENNARD-JONES          [A]
+    %        EK =                                                       [K]
+    %         T = Temperatura                                           [K]
+    %         P = Pressure                                            [bar]
+    %     MMASS = molar mass vector                                 [g/mol]
+    %         g = standard acceleration of gravity                  [cm/s2]
+    %       umf = minimum fluidization velocity                      [cm/s]
+    %       Emf = minimum fluidization porosity                         [ ]
+    % ----------------------------| outlet |-------------------------------
+    %       KBE = gas exchange coefficient between bubble-emulsion    [s-1]
+% -------------------------------------------------------------------------
+    zg     = Global.zg;
+    SIGMA  = Global.SIGMA;
+    EK     = Global.EK;
+    T      = Global.T;
+    P      = Global.P;
+    MMASS  = Global.MMASS;
+    g      = Global.g;
+    umf    = Global.umf;
+    Emf    = Global.Emf;
+    MASS   = MMASS(1:end-1);
+    index1 = length(EK);    %                           number of compounds
+    index2 = length(zg);    %                  number of points in the mesh
+    kbc    = zeros(index2,1);
+    kce    = zeros(index2,1);
+    KBE    = zeros(index2,1);
+% -------------------------------------------------------------------------
     for k = 1:index2
          CTij = CTBW(k,1:index1);
         for nn = 1:index1
@@ -68,12 +89,12 @@ global zg SIGMA EK T P MMASS g umf Emf
             kce(k) = 0;
             disp('KBE (NaN) en RH3Fcn.m')    
         elseif CT > 0
-% ---------- Constantes - Relación de Neufield, et al. (1972) -------------
+% ---------- constants values - Neufield, et al. (1972) -------------------
             A = 1.06036; B = 0.15610; 
             C = 0.19300; D = 0.47635; 
             E = 1.03587; F = 1.52996; 
             G = 1.76474; H = 3.89411;
-% ---------- Cálculo del Coeficiente de Difusión [cm2/s] ------------------
+% ---------- diffusion coefficient calculate [cm2/s] ----------------------
                 Eij = [];
             SIGMAij = [];
              MASSij = [];
@@ -114,7 +135,7 @@ global zg SIGMA EK T P MMASS g umf Emf
          end
      end       
        suma = (sum(Yij./Dij));
-     Dif_ij = zeros(1,index1);% Coeficiente de difusión [cm2/s]
+     Dif_ij = zeros(1,index1);
      for  nn = 1:index1
          if suma(nn) == 0
            Dif_ij(nn) = 0;
@@ -122,7 +143,7 @@ global zg SIGMA EK T P MMASS g umf Emf
            Dif_ij(nn) = (suma(nn))^-1;
          end
      end
-    % ---------- Cálculo de KBE -----------------------------------------------
+% ---------- gas exchange coefficient between bubble-emulsion claculate ---
                 if     strcmp(caracter2,'CH4') 
                           Dif = Dif_ij(1);
                 elseif strcmp(caracter2,'CO2')
@@ -144,33 +165,45 @@ global zg SIGMA EK T P MMASS g umf Emf
        KBE(k) = (factor)^-1;
         else
             disp('Error KBE en RH3Fcn.m')
-        end % final del condicional
-    end % final del bucle
-end % final de la fución
-% ----------------------------| SUB-FUNCIÓN |------------------------------
-function [KWE] = KWEFcn(db,n)
-% ----------------------------| ENTRADAS |---------------------------------
-%     db = diámetro de la burbuja f(z)                               [cm]
-%      n = número de puntos del mallado                               [#]
-%    umf = velocidad de fluidización mínima                        [cm/s]
-%   usg0 = velocidad de flujo inicial                              [cm/s]
-% ----------------------------| SALIDAS |----------------------------------
-%    KWE = coeficiente de intercambio sólido                        [s-1]  
+        end 
+    end 
 % -------------------------------------------------------------------------
-global usg0 umf
-           factor = usg0/umf;
-              KWE = zeros(n,1);
-        if     factor <= 3
-            for j = 1:n
-                   KWE(j) = 100*0.075*(usg0-umf)/(umf*db(j));
-                if db(j) == 0, KWE(j) = 0; end
-            end                            
-        elseif factor > 3
-            for j = 1:n
-                   KWE(j) = (100*0.15/db(j));
-                if db(j) == 0, KWE(j) = 0; end
-            end
-        else
-            disp('Error - Inconsistencia en KWEFcn.m')
+end 
+
+% -------------------------------------------------------------------------
+
+% ----------------------------| KWEFcn sub-function |----------------------
+function [KWE] = KWEFcn(db, Global)
+% -------------------------------------------------------------------------
+    % KWEFcn - function allows to obtain the solid exchange coefficient 
+    % between wake-emulsion [s-1]
+    % ----------------------------| inlet |--------------------------------
+    %        db = bubble diameter                                  f(z)[cm]
+    %    Global = constants structure
+    %       umf = minimum fluidization velocity                      [cm/s]
+    %      usg0 = initial superficial gas velocity                   [cm/s]
+    %         n = mesh points number                                    [#]
+    % ----------------------------| outlet |-------------------------------
+    %       KWE = solid exchange coefficient between wake-emulsion    [s-1]  
+% -------------------------------------------------------------------------
+    umf    = Global.umf;
+    usg0   = Global.usg0;
+    n      = Global.n;
+    factor = usg0/umf;
+    KWE    = zeros(n,1);
+
+    if     factor <= 3
+        for j = 1:n
+                KWE(j) = 100*0.075*(usg0-umf)/(umf*db(j));
+            if db(j) == 0, KWE(j) = 0; end
+        end                            
+    elseif factor > 3
+        for j = 1:n
+                KWE(j) = (100*0.15/db(j));
+            if db(j) == 0, KWE(j) = 0; end
         end
+    else
+        disp('Error - Inconsistencia en KWEFcn.m')
+    end
+% -------------------------------------------------------------------------    
 end
