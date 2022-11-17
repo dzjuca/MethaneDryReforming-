@@ -1,21 +1,28 @@
-function RH2 = RH2Fcn(alpha,ub,CiBW,CiE,caracter)
-% Función RH2Fcn.M permite obtener un término auxiliar RH2 que es parte de
-% la ecuación principal de diseño del reactor TZFBR.
-% ----------------------------| ENTRADAS |---------------------------------
-%    alpha = fracción del lecho ocupado por las burbujas     f(z)
-%       ub = velocidad de ascenso de las burbujas            f(z)
-%     CiBW = Concentracione gas en la Burbuja o Estela       f(z)
-%      CiE = Concentracione gas en la Emulsión               f(z)
-% caracter = Identificador de la Fase (Gas,Sólido)
-% ----------------------------| SALIDAS |----------------------------------
-%      RH2 = vector con el valor parcial de la ecuación de diseño
+function RH2 = RH2Fcn(alpha,ub,CiBW,CiE,Global,caracter)
 % -------------------------------------------------------------------------
-global fw Emf zg Dcat
-      xl = zg(1);
-      xu = zg(end);
-       n = length(zg);
- lambda1 = zeros(n,1);
- lambda2 = zeros(n,1);
+   % RH1Fcn - function allows to obtain the second term (Right Hand Side)
+   % of the mass balance model
+   % ----------------------------| inlet |---------------------------------
+   %    alpha = fraction of bubbles in bed                             f(z)
+   %       ub = bbubles velocity                                       f(z)
+   %     CiBW = gas concentration - Burbuja & Estela  phases           f(z)
+   %      CiE = gas concentration - Emulsion phase                     f(z)
+   %   Global = constants structure
+   % caracter = phase identifier (Gas,Solid)
+   % ----------------------------| outlet |--------------------------------
+   %      RH2 = right-hand side term-2
+% -------------------------------------------------------------------------
+          fw   = Global.fw;
+          Emf  = Global.Emf;
+          zg   = Global.zg;
+          Dcat = Global.Dcat;
+
+          xl   = zg(1);
+          xu   = zg(end);
+          n    = length(zg);
+       lambda1 = zeros(n,1);
+       lambda2 = zeros(n,1);
+
      if     strcmp(caracter,'FGas')
             temporal1 = (alpha+alpha*fw*Emf).*ub;
             temporal2 = dss004(xl,xu,n,temporal1)';
@@ -49,4 +56,5 @@ global fw Emf zg Dcat
      else
             disp('Error - Ingresar un caracter correcto RH2Fcn.m')
      end
+% -------------------------------------------------------------------------
 end
