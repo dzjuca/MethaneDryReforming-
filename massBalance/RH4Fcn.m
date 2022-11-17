@@ -1,19 +1,24 @@
-function RH4 = RH4Fcn(alpha,CT,caracter1,caracter2)
-% Función RH4Fcn.m permite obtener un término auxiliar RH4 que es parte de
-% la ecuación principal de diseño del reactor TZFBR.
-% ----------------------------| ENTRADAS |---------------------------------
-%     alpha = Fracción del lecho ocupado por las burbujas     f(z)
-%        fw = Fracción de la burbuja ocupada por la estela
-%       Emf = Porosidad de mínima fluidización
-%      Dcat = Densidad del catalizador                        [g/cm3]
-%        CT = Concentraciones de todos los compuestos en: 
-%             Burbuja - Estela - Emulsión                     f(z)
-% caracter1 = Identificador de la Fase (Gas,Sólido)
-% caracter2 = Identificador del compuesto
-% ----------------------------| SALIDAS |----------------------------------
-%      RH4 = vector con el valor parcial de la ecuación de diseño
+function RH4 = RH4Fcn(alpha, CT, Global, caracter1, caracter2)
 % -------------------------------------------------------------------------
-global fw Emf Dcat
+     % RH4Fcn - function allows to obtain the fourth term (Right Hand Side)
+     % of the mass balance model
+     % ----------------------------| inlet |-------------------------------
+     %     alpha = fraction of bubbles in bed                          f(z)                 
+     %        CT = a vector with all concentrations species 
+     %             - bubble - wake - emulsion                          f(z)
+     %    Global = constants structure
+     % caracter1 = phase identifier (Gas,Solid)
+     % caracter2 = species identifier (CH4,CO2, ...)
+     %        fw = fraction of wake in bubbles                          [ ]
+     %       Emf = minimum fluidization porosity                        [ ]
+     %      Dcat = catalyst density                                 [g/cm3]
+     % ----------------------------| outlet |------------------------------
+     %       RH4 = right-hand side term-4
+% -------------------------------------------------------------------------
+     fw   = Global.fw;
+     Emf  = Global.Emf;
+     Dcat = Global.Dcat;
+
      if     strcmp(caracter1,'FGBurbuja')
             temporal = Dcat*(1-Emf)*fw*alpha;
             cinetica = CineticaFcn(CT,caracter2);
@@ -33,4 +38,5 @@ global fw Emf Dcat
      else
             disp('Error - Ingresar un caracter correcto RH4Fcn.m')
      end
+% -------------------------------------------------------------------------
 end
