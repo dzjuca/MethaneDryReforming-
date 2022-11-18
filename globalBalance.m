@@ -14,13 +14,13 @@
          u0 = initialConditions(Global);
 % ---------- time simulation (s) ------------------------------------------
     t0 = 0.0; 
-    tf = 3600*1000; 
+    tf = 3600*0.5; 
   tout = linspace(t0,tf,100)';
 % ---------- Implicit (sparse stiff) integration --------------------------
    reltol = 1.0e-6; abstol = 1.0e-6;  
   options = odeset('RelTol',reltol,'AbsTol',abstol,'NonNegative',NoN);
-%       S = JPatternFcn(Global);
-%  options = odeset(options,'JPattern',S); 
+        S = JPatternFcn(Global);
+  options = odeset(options,'JPattern',S); 
    pdeDRM = @(t,u)pdeFcn(t,u,Global);
     [t,u] = ode15s(pdeDRM,tout,u0,options);  
 % ---------- Salidas ------------------------------------------------------
