@@ -131,7 +131,7 @@ function a = actFun( Cc, Global )
 
     a     = (1-(Cc/CcMax))^2;
 
-    if ncall > 435
+    if ncall > 510
         if Cc > CcMax, a = 0; end
         if Cc < 0,     a = 1; end
     end

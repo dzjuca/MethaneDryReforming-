@@ -1,28 +1,34 @@
 function S = JPatternFcn(Global)
-%
-  zg = Global.zg;
+% -------------------------------------------------------------------------
+  % Sparsity pattern of the Jacobian matrix based on a numerical evaluation
+  % Note: the reference to the ODE routine (two places below) should be 
+  % edited to specify the current ODE routine.
+  %
+  % Set independent, dependent variables for the calculation 
+  % of the sparsity pattern
+% -------------------------------------------------------------------------
+  zg      = Global.zg;
   Num_esp = Global.Num_esp;
-%
-% Sparsity pattern of the Jacobian matrix based on a
-% numerical evaluation.  Note: the reference to the ODE
-% routine (two places below) should be edited to specify
-% the current ODE routine.
-%
-% Set independent, dependent variables for the calculation 
-% of the sparsity pattern
- index1 = length(zg);
-  tbase = 0;
+  index1  = length(zg);
+  tbase   = 0;
+
   for i = 1:(index1*Num_esp)
     ybase(i) = 0.5;
   end
   ybase = ybase';
 %
+
+
+pdeModel = @(t,u)pdeFcn(t,u,Global);
+
+
+
 % Compute the corresponding derivative vector
-      ytbase = pdeDRM(tbase,ybase);
+      ytbase = pdeModel(tbase,ybase);
          fac = []; 
       thresh = 1e-16;
   vectorized = 'on';
-   [Jac,fac] = numjac(@pdeDRM,tbase,ybase,ytbase,thresh,fac,vectorized);
+   [Jac,fac] = numjac(pdeModel,tbase,ybase,ytbase,thresh,fac,vectorized);
 %
 % Replace nonzero elements by "1" (so as to create a "0-1" map of the 
 % Jacobian matrix) 
@@ -37,7 +43,8 @@ function S = JPatternFcn(Global)
   stat = sprintf('%sno-ceros%d(%.3f%s)',...
                  ss,non_zero,non_zero_percent,'\%');         
   Tit1 = strcat('$',stat,'$');
-%% ---------- Plot the map -------------------------------------------------
+% -------------------------------------------------------------------------
+% ---------- Plot the map -------------------------------------------------
 % Map of the Num_esp - ODE system
    fig1 = figure;
           hold on
@@ -57,4 +64,5 @@ function S = JPatternFcn(Global)
   hold off
   print(fig1,'-dpdf','-r500','MATRIZ_EJ')
   close all
+% -------------------------------------------------------------------------
   end

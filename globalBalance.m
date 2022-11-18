@@ -21,8 +21,8 @@
   options = odeset('RelTol',reltol,'AbsTol',abstol,'NonNegative',NoN);
         S = JPatternFcn(Global);
   options = odeset(options,'JPattern',S); 
-   pdeDRM = @(t,u)pdeFcn(t,u,Global);
-    [t,u] = ode15s(pdeDRM,tout,u0,options);  
+ pdeModel = @(t,u)pdeFcn(t,u,Global);
+    [t,u] = ode15s(pdeModel,tout,u0,options);  
 % ---------- Salidas ------------------------------------------------------
   [T_b,T_e,T] = SkinFcnMac(t,u);
 % ---------------------------| End Program |-------------------------------
