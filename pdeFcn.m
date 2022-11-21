@@ -11,6 +11,15 @@ function ut = pdeFcn(t,u,Global)
 % -------------------------------------------------------------------------
 % --------------------| constants values |---------------------------------
 global ncall 
+
+
+    persistent ncall_2
+    if isempty(ncall_2)
+        ncall_2 = 0;
+    end
+
+
+
     zg      = Global.zg;
     fw      = Global.fw;
     Emf     = Global.Emf;
@@ -203,7 +212,8 @@ global ncall
     for i = 1:index1, ut(i+(14*index1)) = u8bt(i); end
     for i = 1:index1, ut(i+(15*index1)) = u8et(i); end
 % --------------------| Number Calls To pdeFcn |---------------------------
-    ncall = ncall+1;
-    disp([ncall,t])
+    ncall   = ncall+1;
+    ncall_2 = ncall_2+1;
+    disp([ncall,ncall_2,t])
 % --------------------| pdeFcn - End |-------------------------------------
 end 
