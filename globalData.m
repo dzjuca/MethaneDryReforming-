@@ -66,6 +66,9 @@ function Global = globalData()
       Global.Dcat  = 0.8730;   % catalyst density                   [g/cm3]
       Global.DIn   = 0.7300;   % inert density                      [g/cm3]
       Global.CcMax = 0.3051;   % max coke concentration      [g.coke/g.cat]
+      Global.cAl2O3  = 0.85;   % alumina concentration      [g.Al2O3/g.cat]
+      Global.cNickel = 0.05;   % nickel concentration          [g.Ni/g.cat]
+      Global.cCeria  = 0.10;   % ceria concentration           [g.Ce/g.cat]
 % ---------- fluidized bed constant data ----------------------------------
       Global.umf = (16.093/60.0); % minimum fluidization velocity    [cm/s] 
       Global.fw  = 0.15;          % fraction of wake in bubbles         [ ]
@@ -136,6 +139,10 @@ function Global = globalData()
       Global.MMASS(5) = 18.0148;      % - H2O                       [g/mol]
       Global.MMASS(6) = 28.0140;      % - N2                        [g/mol] 
       Global.MMASS(7) = 12.0110;      % - C(s)                      [g/mol]
+% ---------- molar mass for each solid specie -----------------------------
+      Global.mMolarAl2O3  = 101.960;  %                             [g/mol]
+      Global.mMolarCeria  = 140.120;  %                             [g/mol]
+      Global.mMolarNickel = 58.6934;  %                             [g/mol]
 % ---------- Potentials for each compound - LENNARD-JONES -----------------
       Global.SIGMA(1) = 3.758;        % - CH4                           [A]
       Global.SIGMA(2) = 3.941;        % - CO2                           [A]
@@ -159,7 +166,7 @@ function Global = globalData()
       Global.HCC.N2  = [3.539, -0.261e-3, 0.007e-5, 0.157e-8, -0.099e-11];  
 % ---------- solid - heat capacity ---------------------------------------
       ft       = fittype( 'smoothingspline' );
-% ---------- Al2O3 - heat capacity fit ------------------------------------
+% ---------- Al2O3 - heat capacity fit [298.15 K - 2327 K] ---------------
       T_al2o3  = [298.15; 300.00; 400.00; 500.00; 600.00; 700.00; 800.00; 
                   900.00; 1000.0; 1100.0; 1200.0; 1300.0; 1400.0; 1500.0; 
                   1600.0; 1700.0; 1800.0; 1900.0; 2000.0; 2100.0; 2200.0; 
@@ -173,7 +180,8 @@ function Global = globalData()
       [xData, yData]    = prepareCurveData( T_al2o3, Cp_al2o3 );
       [cpAl2O3Fit, ~]   = fit( xData, yData, ft );
       Global.cpAl2O3Fit = cpAl2O3Fit;
-% ---------- Ni - heat capacity fit ---------------------------------------
+      
+% ---------- Ni - heat capacity fit [298.15 K - 1726 K] -------------------
 
       T_nickel  = [298.15; 300.00; 400.00; 500.00; 600.00; 700.00; 800.00; 
                    900.00; 1000.0; 1100.0; 1200.0; 1300.0; 1400.0; 1500.0; 
@@ -187,7 +195,7 @@ function Global = globalData()
       [cpNickelFit, ~]   = fit( xData, yData, ft );
       Global.cpNickelFit = cpNickelFit;
 
-% ---------- Ce - heat capacity fit ---------------------------------------
+% ---------- Ce - heat capacity fit [298.15 K - 999 K] --------------------
       T_ceria  = [298.15; 300.00; 400.00; 500.00; 600.00; 700.00; 800.00; 
                   900.00; 999.00];
 
