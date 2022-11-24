@@ -1,9 +1,9 @@
-function cpGasMix = cpGasMixFcn(Global, Cg, T)
+function cpGasMix = cpGasMixFcn(Global, Cgas, T)
 % -------------------------------------------------------------------------
   % cpGasMix function 
   % ----------------------------| input |----------------------------------
   %   Global = constant values structure 
-  %       Cg = gas mixing concentration                           [mol/cm3]
+  %     Cgas = vector with concentration for each species         [mol/cm3]
   %        T = Temperature                                              [K]
   %        R = Universal Gas Constant                             [kJ/molK] 
   % ----------------------------| output |---------------------------------
@@ -14,7 +14,7 @@ function cpGasMix = cpGasMixFcn(Global, Cg, T)
     flds   = fields(HCC);
     [m, ~] = size(flds);
     cp_i   = zeros(m);
-    y_i    = molarFractionFcn(Cg);
+    y_i    = molarFractionFcn(Cgas);
 
     for i=1:m
 

@@ -1,21 +1,29 @@
-function molarFraction = molarFractionFcn(Cg)
+function molarFraction = molarFractionFcn(Cgas)
+% -------------------------------------------------------------------------
+    % molarFraction function 
+    % ----------------------------| input |--------------------------------
+    %   Cgas = vector with concentration for each species         [mol/cm3]
+    % ----------------------------| output |-------------------------------
+    % molarFraction = vector with molar fraction for each species        []
+% -------------------------------------------------------------------------
 
-    Cg_sum = sum(Cg);
-    [m, ~] = size(Cg);
+    Cgas_sum = sum(Cgas);
+    [m, ~] = size(Cgas);
     
-    if Cg_sum == 0
+    if Cgas_sum == 0
 
         molarFraction = zeros(m);
 
     elseif isnan(Cg)
                 
-        molarFraction = Cg./Cg_sum;
+        molarFraction = Cgas./Cgas_sum;
         disp('Cg = NaN molarFractionFcn.m')
 
     else
 
-        molarFraction = Cg./Cg_sum;
+        molarFraction = Cgas./Cgas_sum;
         
     end
+% -------------------------------------------------------------------------
 
 end

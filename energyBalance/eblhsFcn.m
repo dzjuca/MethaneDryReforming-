@@ -1,17 +1,17 @@
-function eblhs = eblhsFcn(alpha, Global, T, Cgas)
+function eblhs = eblhsFcn(alpha, Global, Cgas, T)
 % -------------------------------------------------------------------------
   % eblhsFcn function 
   % ----------------------------| input |----------------------------------
   %   alpha = fraction of bubbles in bed                                 []
   %  Global = constant values structure 
-  %       T = temperature                                               [K]
   %    Cgas = concentration vector of each species                [mol/cm3]
+  %       T = temperature                                               [K]
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
   %    Dsol = solid density                                      [g/cm3]
   %     Cpg = gas mixing heat capacity                            [J/mol K]
+  %     Cps = solid mixing heat capacity                        [J/g-cat K]
   %      Cg = gas mixing concentration                            [mol/cm3]
-  %     Cps = solid mixing heat capacity                          [J/mol K]
   % ----------------------------| output |---------------------------------
   %   eblhs = left-hand side term                                      [xx]
 % -------------------------------------------------------------------------
