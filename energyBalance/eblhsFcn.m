@@ -13,7 +13,7 @@ function eblhs = eblhsFcn(alpha, Global, Cgas, T)
   %     Cps = solid mixing heat capacity                        [J/g-cat K]
   %      Cg = gas mixing concentration                            [mol/cm3]
   % ----------------------------| output |---------------------------------
-  %   eblhs = left-hand side term                                      [xx]
+  %   eblhs = left-hand side term                                 [J/cm3 K]
 % -------------------------------------------------------------------------
   fw   = Global.fw;
   Emf  = Global.Emf;
@@ -22,13 +22,9 @@ function eblhs = eblhsFcn(alpha, Global, Cgas, T)
   Cps  = cpSolMixFcn(Global, T);
   Cg   = cGasMixFcn(Cgas);
 
-  eblhs = ((alpha + alpha*fw*Emf)*Cpg*Cg) + alpha*fw*(1 - Emf)*Dsol*Cps;
-
+  eblhs = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg) + ...
+            alpha.*fw.*(1 - Emf).*Dsol.*Cps;
+% -------------------------------------------------------------------------
 end
-
-
-
-  %      Cs = solid mixing concentration                          [xxxxx]
-  %       M = molar mass                                           [gr/mol]
 
 

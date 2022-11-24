@@ -7,23 +7,33 @@ function molarFraction = molarFractionFcn(Cgas)
     % molarFraction = vector with molar fraction for each species        []
 % -------------------------------------------------------------------------
 
-    Cgas_sum = sum(Cgas);
-    [m, ~] = size(Cgas);
+    Cgas_sum      = sum(Cgas, 2);
+    [m, n]        = size(Cgas);
+    molarFraction = zeros(m,n);
+
+    for i = 1:m
+
+        if Cgas_sum(i) == 0
+
+            molarFraction(i,:) = zeros(1,n);
     
-    if Cgas_sum == 0
+        elseif isnan(Cgas_sum(i))
+                    
+            molarFraction(i,:) = Cgas(i,:)./Cgas_sum(i);
+            disp('Cg = NaN molarFractionFcn.m')
 
-        molarFraction = zeros(m);
+        elseif isinf(Cgas_sum(i))
+                    
+            molarFraction(i,:) = Cgas(i,:)./Cgas_sum(i);
+            disp('Cg = Inf molarFractionFcn.m')
+        else
+    
+            molarFraction(i,:) = Cgas(i,:)./Cgas_sum(i);
+            
+        end
 
-    elseif isnan(Cg)
-                
-        molarFraction = Cgas./Cgas_sum;
-        disp('Cg = NaN molarFractionFcn.m')
-
-    else
-
-        molarFraction = Cgas./Cgas_sum;
-        
     end
+
 % -------------------------------------------------------------------------
 
 end
