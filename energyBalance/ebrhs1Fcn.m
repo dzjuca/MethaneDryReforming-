@@ -19,7 +19,7 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes)
   %       n = number of grid points in the z domain including the
   %           boundary points                                            []                        
   % ----------------------------| output |---------------------------------
-  %   eblhs = left-hand side term                                 [J/cm3 K]
+  %  ebrhs1 = right-hand side term-1                              [J/cm3 s]
 % -------------------------------------------------------------------------
     fw   = Global.fw;
     Emf  = Global.Emf;
