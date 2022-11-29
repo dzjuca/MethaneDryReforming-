@@ -1,18 +1,30 @@
-function kg = thermalCondMixGasFcn(T, Pc, Tc, M, lam_p, Y)
+function lambdaMix = thermalCondMixGasFcn(Global, T, Cgas)
+% -------------------------------------------------------------------------
+    % thermalCondMixGasFcn function calculates the thermal conductivity 
+    % of mix gas
+    % ----------------------------| input |--------------------------------
+    %  Global = constant values structure   
+    %  T = bubble|emulsion temperature                                  [K]
+    %  Cgas_e = concentration vector of each species (emulsion)   [mol/cm3]
 
+    % Tc = vector with temperature for each specie, critical constant   [k]
+    % Pc = vector with pressure for each specie, critical constant    [bar]
+    %  M = vector with molecular weight for each specie             [g/mol]
 
-    % This function calculates the thermal conductivity of mix gas
-    % ----- function in -------------------------------------------------------
-    % Tc  = vector with temperature for each specie, critical constant [k]
-    % Pc  = vector with pressure for each specie, critical constant [bar]
-    % T   = temperature operation [k]
-    % M   = vector with molecular weight for each specie, [g/mol]
     % lam_p = vector with thermal conductivity for each specie
-    % E   = numeral constant near to 1   
-    % Y  = vector with molar fraction for each specie
-    % ----- function out ------------------------------------------------------
-    % kg = thermal conductivity for a gas mixture
-    % -------------------------------------------------------------------------
+    %   E   = numeral constant near to 1   
+    %    Y  = vector with molar fraction for each specie
+
+  % ----------------------------| output |---------------------------------
+  %   kg = thermal conductivity for a gas mixture                 [W/ cm K]
+% -------------------------------------------------------------------------
+
+       Pc = Global.Pc; 
+       Tc = Global.Tc;
+        M = Global.MM;
+    lam_p = 0;
+        Y = molarFractionFcn(Cgas);
+
 
     Tr = T./Tc;
     r  = 210*(Tc.*(M.^3)./(Pc.^4)).^(1/6);
@@ -50,13 +62,5 @@ function kg = thermalCondMixGasFcn(T, Pc, Tc, M, lam_p, Y)
 
     lambdaMix = sum(index_1);
 
-
-        
-
-
-
-
-
-
-
+% -------------------------------------------------------------------------
 end

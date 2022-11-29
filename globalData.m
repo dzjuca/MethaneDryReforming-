@@ -205,6 +205,28 @@ function Global = globalData()
       [xData, yData]    = prepareCurveData( T_ceria, Cp_ceria );
       [cpCeriaFit, ~]   = fit( xData, yData, ft );
       Global.cpCeriaFit = cpCeriaFit;
-% -------------------------------------------------------------------------         
+% ---------- molar mass for each specie -----------------------------------
+      Global.MM.CH4 = 16.0426;      % - CH4                         [g/mol]
+      Global.MM.CO2 = 44.0090;      % - CO2                         [g/mol]
+      Global.MM.CO  = 28.0100;      % - CO                          [g/mol]
+      Global.MM.H2  = 2.01580;      % - H2                          [g/mol]
+      Global.MM.H2O = 18.0148;      % - H2O                         [g/mol]
+      Global.MM.N2  = 28.0140;      % - N2                          [g/mol] 
+      Global.MM.C   = 12.0110;      % - C(s)                        [g/mol]   
+% ---------- temperature for each specie - critical constant --------------
+      Global.Tc.CH4 = 190.56;       % - CH4                             [K]
+      Global.Tc.CO2 = 304.12;       % - CO2                             [K]
+      Global.Tc.CO  = 132.85;       % - CO                              [K]
+      Global.Tc.H2  = 32.980;       % - H2                              [K]
+      Global.Tc.H2O = 647.14;       % - H2O                             [K]
+      Global.Tc.N2  = 126.20;       % - N2                              [K]
+% ---------- pressure for each specie - critical constant -----------------
+      Global.Pc.CH4 = 45.990;       % - CH4                           [bar]
+      Global.Pc.CO2 = 73.740;       % - CO2                           [bar]
+      Global.Pc.CO  = 34.940;       % - CO                            [bar]
+      Global.Pc.H2  = 12.930;       % - H2                            [bar]
+      Global.Pc.H2O = 220.64;       % - H2O                           [bar]
+      Global.Pc.N2  = 33.980;       % - N2                            [bar]
+% ------------------------------------------------------------------------- 
 % ------------------------- END globalData-function -----------------------
 end

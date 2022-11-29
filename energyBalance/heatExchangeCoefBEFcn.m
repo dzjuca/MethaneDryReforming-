@@ -36,7 +36,7 @@ function Hbe = heatExchangeCoefBEFcn(Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
     Hbc = temporal_1 + temporal_2.*temporal_3;
 
     temporal_4 = 6.78.*((Cg_e.*Cpg_e.*kg_e).^(1/2));
-    temporal_5 = (Emf.*ub./(db^3))^(1/2);
+    temporal_5 = (Emf.*ub./(db.^3)).^(1/2);
 
     Hce = temporal_4.*temporal_5;
 
