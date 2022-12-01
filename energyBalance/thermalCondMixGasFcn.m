@@ -16,22 +16,29 @@ function kg = thermalCondMixGasFcn(Global, T_z, Cgas)
     %   E   = numeral constant near to 1   
     %  Y_z  = vector with molar fraction for each specie f(z)
 
-  % ----------------------------| output |---------------------------------
-  %      kg = thermal conductivity for a gas mixture              [W/ cm K]
+    % ----------------------------| output |-------------------------------
+    %      kg = thermal conductivity for a gas mixture            [W/ cm K]
 % -------------------------------------------------------------------------
 
     [lf, ~] = size(fields(Global.Pcr));
-    Pc      = zeros(1,lf); 
+
+    Tb      = zeros(1,lf); 
     Tc      = zeros(1,lf); 
+    Pc      = zeros(1,lf); 
+    Vc      = zeros(1,lf); 
+    Mu      = zeros(1,lf); 
     M       = zeros(1,lf); 
+    Hcc     = zeros(1,5); 
     flds    = fields(Global.Pcr);
 
     for l = 1:lf
-
-        Pc(1,l)    = Global.Pcr.(flds{l});
-        Tc(1,l)    = Global.Tcr.(flds{l});
-        M(1,l)     = Global.MM.(flds{l});
-
+        Tb(1,l)  = Global.Tb.(flds{l});
+        Tc(1,l)  = Global.Tcr.(flds{l});
+        Pc(1,l)  = Global.Pcr.(flds{l});
+        Vc(1,l)  = Global.Vc.(flds{l});
+        Mu(1,l)  = Global.Mu.(flds{l});
+        M(1,l)   = Global.MM.(flds{l});
+        Hcc(l,:) = Global.HCC.(flds{l});
     end
 
     E     = Global.E;
@@ -44,8 +51,8 @@ function kg = thermalCondMixGasFcn(Global, T_z, Cgas)
 
         T    = T_z(k);
         Y    = Y_z(k);
-        kg_i = thermalCondFcn();
-
+        kg_i = thermalCondFcn(T, Tb, Tc, Pc, Vc, Mu, M, Hcc);
+        
         Tr = T./Tc;
         r  = 210*(Tc.*(M.^3)./(Pc.^4)).^(1/6);
     

@@ -229,6 +229,27 @@ function Global = globalData()
       Global.Pcr.H2O = 220.64;       % - H2O                          [bar]
       Global.Pcr.N2  = 33.980;       % - N2                           [bar]
 % ---------- thermal conductivity - constant E ---------------------------- 
-      Global.E = 1;                 %   E - numeral constant near to 1   []
+      Global.E = 1;                  %   E - numeral constant near to 1  []
+% ---------- experimental temperature was used to determine Tc and Pc -----
+      Global.Tb.CH4 = 111.66;        % - CH4                            [K] 
+      Global.Tb.CO2 = 81.660;        % - CO2                            [K] # pendiente revisar el valor (no existe en las tablas)
+      Global.Tb.CO  = 81.660;        % - CO                             [K] 
+      Global.Tb.H2  = 20.270;        % - H2                             [K] 
+      Global.Tb.H2O = 373.15;        % - H2O                            [K] 
+      Global.Tb.N2  = 77.350;        % - N2                             [K] 
+% ---------- volume, critical constant for each specie --------------------
+      Global.Vc.CH4 = 98.600;        % - CH4                      [cm3/mol]
+      Global.Vc.CO2 = 94.070;        % - CO2                      [cm3/mol]
+      Global.Vc.CO  = 93.100;        % - CO                       [cm3/mol]
+      Global.Vc.H2  = 64.200;        % - H2                       [cm3/mol]
+      Global.Vc.H2O = 55.950;        % - H2O                      [cm3/mol]
+      Global.Vc.N2  = 90.100;        % - N2                       [cm3/mol]
+% ---------- dipole moment for each specie --------------------------------
+      Global.Mu.CH4 = 0.00;          % CH4                         [debyes]
+      Global.Mu.CO2 = 0.00;          % CO2                         [debyes]
+      Global.Mu.CO  = 0.10;          % CO                          [debyes]
+      Global.Mu.H2  = 0.00;          % H2                          [debyes]
+      Global.Mu.H2O = 1.80;          % H2O                         [debyes]
+      Global.Mu.N2  = 0.00;          % N2                          [debyes]
 % ------------------------- END globalData-function -----------------------
 end
