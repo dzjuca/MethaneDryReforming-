@@ -13,6 +13,7 @@ function Global = globalData()
       Global.Tref    = (475.0 + 273.15); % reference temperature        [K]
       Global.Tc      = (512.5 + 273.15); % reference temperature        [K]
       Global.Num_esp = 16;            % number of species               [#]
+      Global.nge     = 6;             % gas species number              [#]
 % ----------| Flow rate and concentration of species |---------------------
 % ----- total feed flow in the reactor's bottom ---------------------------
       Global.QT_in = 247.5;           %                        [STP ml/min]
@@ -214,19 +215,20 @@ function Global = globalData()
       Global.MM.N2  = 28.0140;      % - N2                          [g/mol] 
       Global.MM.C   = 12.0110;      % - C(s)                        [g/mol]   
 % ---------- temperature for each specie - critical constant --------------
-      Global.Tc.CH4 = 190.56;       % - CH4                             [K]
-      Global.Tc.CO2 = 304.12;       % - CO2                             [K]
-      Global.Tc.CO  = 132.85;       % - CO                              [K]
-      Global.Tc.H2  = 32.980;       % - H2                              [K]
-      Global.Tc.H2O = 647.14;       % - H2O                             [K]
-      Global.Tc.N2  = 126.20;       % - N2                              [K]
+      Global.Tcr.CH4 = 190.56;       % - CH4                            [K]
+      Global.Tcr.CO2 = 304.12;       % - CO2                            [K]
+      Global.Tcr.CO  = 132.85;       % - CO                             [K]
+      Global.Tcr.H2  = 32.980;       % - H2                             [K]
+      Global.Tcr.H2O = 647.14;       % - H2O                            [K]
+      Global.Tcr.N2  = 126.20;       % - N2                             [K]
 % ---------- pressure for each specie - critical constant -----------------
-      Global.Pc.CH4 = 45.990;       % - CH4                           [bar]
-      Global.Pc.CO2 = 73.740;       % - CO2                           [bar]
-      Global.Pc.CO  = 34.940;       % - CO                            [bar]
-      Global.Pc.H2  = 12.930;       % - H2                            [bar]
-      Global.Pc.H2O = 220.64;       % - H2O                           [bar]
-      Global.Pc.N2  = 33.980;       % - N2                            [bar]
-% ------------------------------------------------------------------------- 
+      Global.Pcr.CH4 = 45.990;       % - CH4                          [bar]
+      Global.Pcr.CO2 = 73.740;       % - CO2                          [bar]
+      Global.Pcr.CO  = 34.940;       % - CO                           [bar]
+      Global.Pcr.H2  = 12.930;       % - H2                           [bar]
+      Global.Pcr.H2O = 220.64;       % - H2O                          [bar]
+      Global.Pcr.N2  = 33.980;       % - N2                           [bar]
+% ---------- thermal conductivity - constant E ---------------------------- 
+      Global.E = 1;                 %   E - numeral constant near to 1   []
 % ------------------------- END globalData-function -----------------------
 end

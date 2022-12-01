@@ -26,8 +26,8 @@ function Hbe = heatExchangeCoefBEFcn(Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
     Cpg_b = cpGasMixFcn(Global, Cgas_b, Tb);
     Cpg_e = cpGasMixFcn(Global, Cgas_e, Te);
 
-    kg_b  = thermalCondMixGasFcn();
-    kg_e  = thermalCondMixGasFcn();
+    kg_b  = thermalCondMixGasFcn(Global, Tb, Cgas_b);
+    kg_e  = thermalCondMixGasFcn(Global, Te, Cgas_e);
 
     temporal_1 = 4.5.*(umf.*Cg_b.*Cpg_b)./db;
     temporal_2 = (5.85.*(g.^(1/4)))/(db.^(5/4));

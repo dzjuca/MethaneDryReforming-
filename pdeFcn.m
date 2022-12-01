@@ -66,8 +66,8 @@ global ncall
     for i = 1:(index1), u6e(i) = u(i+11*(index1));end % u6e = N2  emulsion
     for i = 1:(index1), u7w(i) = u(i+12*(index1));end % u7w = Cc  wake
     for i = 1:(index1), u7e(i) = u(i+13*(index1));end % u7e = Cc  emulsion
-    for i = 1:(index1), u8b(i) = u(i+14*(index1));end % u7w = T   bubble
-    for i = 1:(index1), u8e(i) = u(i+15*(index1));end % u7e = T   emulsion
+    for i = 1:(index1), u8b(i) = u(i+14*(index1));end % u8b = T   bubble
+    for i = 1:(index1), u8e(i) = u(i+15*(index1));end % u8e = T   emulsion
 % --------------------| Boundary Conditions 1 |----------------------------
 % ---------- z = 0 gas - bubble & wake phase ------------------------------
     u1b(1) = CH4in; u2b(1) = CO2in; u3b(1) = 0.000; 
@@ -178,7 +178,8 @@ global ncall
 % --------------------| Energy Balance - Temperature - Bubble Phase |------
 % ----- constant value ----------------------------------------------------
     EBCF1 = 1./eblhsFcn(alpha, Global, CTBW, u8b);
-    u8bt  = - ebrhs1Fcn(alpha,Global,CTBW,u8b,ub).*EBCF1; 
+    u8bt  = - ebrhs1Fcn(alpha, Global, CTBW, u8b, ub).*EBCF1    ...
+            + ebrhs2Fcn(alpha, Global, CTBW, CTE, u8b, u8e, ub, db);
 % --------------------| Energy Balance - Temperature - Emulsion Phase |----
 % ----- constant value ----------------------------------------------------
 % EBCF2 = 1./eblhsFcn(alpha, Global, CTE, u8e);

@@ -11,6 +11,7 @@ function ebrhs2 = ebrhs2Fcn(alpha, Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
   %      db = bubble diameter                                          [cm]
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
+  %     nge = gas species number                                         []
   %     y_i = molar fraction of each species                             []  
   %     Hbe = heat exchange coefficient between bubble-emulsion [J/cm3 s K]        
   % ----------------------------| output |---------------------------------
@@ -19,8 +20,10 @@ function ebrhs2 = ebrhs2Fcn(alpha, Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
 
     fw  = Global.fw;
     Emf = Global.Emf;
-    y_i = molarFractionFcn(Cgas);
-    Hbe = heatExchangeCoefBEFcn(Global, Cgas_b, Cgas_e, Tb, Te, ub, db);
+    nge = Global.nge;
+    y_i = molarFractionFcn(Cgas_b(:,1:nge));
+    Hbe = heatExchangeCoefBEFcn(Global, Cgas_b(:,1:nge), ...
+                                Cgas_e(:,1:nge), Tb, Te, ub, db);
 
     temporal_1 = (alpha + alpha.*fw.*Emf);
     temporal_2 = y_i.*Hbe.*(Te - Tb);

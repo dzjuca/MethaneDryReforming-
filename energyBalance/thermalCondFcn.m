@@ -1,4 +1,4 @@
-function thermalCond = thermalConductivityFcn(T, Tb, Tc, Pc, Vc, mu, M, Cp_const)
+function thermalCond = thermalCondFcn(T, Tb, Tc, Pc, Vc, mu, M, Cp_const)
 
 
     % This function calculates the thermal conductivity of unique gas specie
