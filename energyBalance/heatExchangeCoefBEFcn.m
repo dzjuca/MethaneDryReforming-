@@ -9,13 +9,15 @@ function Hbe = heatExchangeCoefBEFcn(Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
   %      Te = emulsion temperature                                      [K]
   %      ub = bubble velocity                                        [cm/s]
   %      db = bubble diameter                                          [cm]
-
+  % -----
   %     umf = minimum fluidization velocity                          [cm/s]   
   %       g = gravity                                               [cm/s2]
   %      Cg = gas mixing concentration  (bubble/emulsion)         [mol/cm3]   
   %     Cpg = gas mixing heat capacity  (bubble/emulsion)         [J/mol K] 
   %      kg = thermal conductivity of the mixing gas       
-  %                                   (bubble/emulsion)             [W/m k] ### arreglar unidades
+  %                                   (bubble/emulsion)            [W/cm k]
+  %     Hbc = heat exchange coefficient between bubble-cloud      [W/K cm3]
+  %     Hce = heat exchange coefficient between cloud-emulsion    [W/K cm3]
   % ----------------------------| output |---------------------------------
   %     Hbe = heat exchange coefficient between bubble-emulsion [J/s cm3 K] 
 % -------------------------------------------------------------------------

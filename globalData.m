@@ -230,6 +230,7 @@ function Global = globalData()
       Global.Pcr.N2  = 33.980;       % - N2                           [bar]
 % ---------- thermal conductivity - constant E ---------------------------- 
       Global.E = 1;                  %   E - numeral constant near to 1  []
+      Global.k_factor = 0;           %   k - factor correction           []                                     []
 % ---------- experimental temperature was used to determine Tc and Pc -----
       Global.Tb.CH4 = 111.66;        % - CH4                            [K] 
       Global.Tb.CO2 = 81.660;        % - CO2                            [K] # pendiente revisar el valor (no existe en las tablas)

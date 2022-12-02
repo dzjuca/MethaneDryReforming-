@@ -29,5 +29,5 @@ function ebrhs2 = ebrhs2Fcn(alpha, Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
     temporal_2 = y_i.*Hbe.*(Te - Tb);
 
     ebrhs2 = temporal_1.*(sum(temporal_2,2));
-
+% -------------------------------------------------------------------------
 end
