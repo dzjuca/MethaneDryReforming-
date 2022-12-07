@@ -7,6 +7,7 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes)
   %    Cgas = concentration vector of each species                [mol/cm3]
   %       T = temperature                                               [K]
   %    ubes = velocity (gas-bubble/gas-emulsion/solid)               [cm/s]
+  % -----
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
   %    Dsol = solid density                                         [g/cm3]
@@ -17,20 +18,23 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes)
   %      zl = lower boundary value of T                                  []
   %      zu = upper boundary value of T                                  []
   %       n = number of grid points in the z domain including the
-  %           boundary points                                            []                        
+  %           boundary points                                            [] 
+  %     gen = gas species number                                         []
   % ----------------------------| output |---------------------------------
-  %  ebrhs1 = right-hand side term-1                              [J/cm3 s]
+  %  ebrhs1 = right-hand side term-1                              [J/s cm3]
 % -------------------------------------------------------------------------
     fw   = Global.fw;
     Emf  = Global.Emf;
     Dsol = Global.Dcat;
     zg   = Global.zg; 
-    Cpg  = cpGasMixFcn(Global, Cgas, T);
+    gen  = Global.gen;
+    Cpg  = cpGasMixFcn(Global, Cgas(:,1:gen), T);
     Cps  = cpSolMixFcn(Global, T);
-    Cg   = cGasMixFcn(Cgas);
+    Cg   = cGasMixFcn(Cgas(:,1:gen));
     zl   = zg(1);
     zu   = zg(end);
     n    = length(zg);
+
 
     temporal_1 = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg.*ubes);
     temporal_2 = (alpha.*fw.*(1 - Emf).*Dsol.*ubes.*Cps);

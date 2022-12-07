@@ -12,6 +12,7 @@ function Hbe = heatExchangeCoefBEFcn(Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
   % -----
   %     umf = minimum fluidization velocity                          [cm/s]   
   %       g = gravity                                               [cm/s2]
+  %     Emf = minimum fluidization porosity                              []
   %      Cg = gas mixing concentration  (bubble/emulsion)         [mol/cm3]   
   %     Cpg = gas mixing heat capacity  (bubble/emulsion)         [J/mol K] 
   %      kg = thermal conductivity of the mixing gas       
@@ -23,6 +24,7 @@ function Hbe = heatExchangeCoefBEFcn(Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
 % -------------------------------------------------------------------------
     umf   = Global.umf;
     g     = Global.g;
+    Emf   = Global.Emf;
     Cg_b  = cGasMixFcn(Cgas_b);
     Cg_e  = cGasMixFcn(Cgas_e);
     Cpg_b = cpGasMixFcn(Global, Cgas_b, Tb);
@@ -32,7 +34,7 @@ function Hbe = heatExchangeCoefBEFcn(Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
     kg_e  = thermalCondMixGasFcn(Global, Te, Cgas_e);
 
     temporal_1 = 4.5.*(umf.*Cg_b.*Cpg_b)./db;
-    temporal_2 = (5.85.*(g.^(1/4)))/(db.^(5/4));
+    temporal_2 = (5.85.*(g.^(1/4)))./(db.^(5/4));
     temporal_3 = (kg_b.*Cg_b.*Cpg_b).^(1/2);
 
     Hbc = temporal_1 + temporal_2.*temporal_3;

@@ -6,9 +6,11 @@ function eblhs = eblhsFcn(alpha, Global, Cgas, T)
   %  Global = constant values structure 
   %    Cgas = concentration vector of each species                [mol/cm3]
   %       T = temperature                                               [K]
+  % -----
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
-  %    Dsol = solid density                                      [g/cm3]
+  %    Dsol = solid density                                         [g/cm3]
+  %     gen = gas species number                                         []
   %     Cpg = gas mixing heat capacity                            [J/mol K]
   %     Cps = solid mixing heat capacity                        [J/g-cat K]
   %      Cg = gas mixing concentration                            [mol/cm3]
@@ -18,9 +20,10 @@ function eblhs = eblhsFcn(alpha, Global, Cgas, T)
   fw   = Global.fw;
   Emf  = Global.Emf;
   Dsol = Global.Dcat;
-  Cpg  = cpGasMixFcn(Global, Cgas, T);
+  gen  = Global.gen;
+  Cpg  = cpGasMixFcn(Global, Cgas(:,1:gen), T);
   Cps  = cpSolMixFcn(Global, T);
-  Cg   = cGasMixFcn(Cgas);
+  Cg   = cGasMixFcn(Cgas(:,1:gen));
 
   eblhs = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg) + ...
             alpha.*fw.*(1 - Emf).*Dsol.*Cps;

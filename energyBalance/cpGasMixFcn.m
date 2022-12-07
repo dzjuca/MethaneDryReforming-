@@ -25,6 +25,6 @@ function cpGasMix = cpGasMixFcn(Global, Cgas, T)
 
     end
 
-    cpGasMix = sum(cp_i.*y_i,2);
+    cpGasMix = sum((cp_i.*y_i),2);
 % -------------------------------------------------------------------------
 end

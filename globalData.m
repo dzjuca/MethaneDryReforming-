@@ -13,7 +13,7 @@ function Global = globalData()
       Global.Tref    = (475.0 + 273.15); % reference temperature        [K]
       Global.Tc      = (512.5 + 273.15); % reference temperature        [K]
       Global.Num_esp = 16;            % number of species               [#]
-      Global.nge     = 6;             % gas species number              [#]
+      Global.gen     = 6;             % gas species number              [#]
 % ----------| Flow rate and concentration of species |---------------------
 % ----- total feed flow in the reactor's bottom ---------------------------
       Global.QT_in = 247.5;           %                        [STP ml/min]

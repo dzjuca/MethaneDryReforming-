@@ -57,7 +57,7 @@ function kg = thermalCondMixGasFcn(Global, T_z, Cgas)
     for k = 1:nmesh
 
         T    = T_z(k);
-        Y    = Y_z(k);
+        Y    = Y_z(k,:);
         kg_i = thermalCondFcn(T, Tb, Tc, Pc, Vc, Mu, M, Hcc, R, k_factor);
         
         Tr = T./Tc;
@@ -71,9 +71,9 @@ function kg = thermalCondMixGasFcn(Global, T_z, Cgas)
     
             for j = 1:n
 
-                lamtr_ij  = (r(j)*lamtr(i))/(r(i)*lamtr(j));
-                A_ij(i,j) = E*(1 + ((lamtr_ij)^(1/2))*((M(i)/M(j))^(1/4)))^2/ ...
-                            (8*(1 + (M(i)/M(j))))^(1/2);
+        lamtr_ij  = (r(j)*lamtr(i))/(r(i)*lamtr(j));
+        A_ij(i,j) = E*(1 + ((lamtr_ij)^(1/2))*((M(i)/M(j))^(1/4)))^2/ ...
+                    (8*(1 + (M(i)/M(j))))^(1/2);
     
             end
     
