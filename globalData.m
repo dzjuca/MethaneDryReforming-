@@ -252,5 +252,32 @@ function Global = globalData()
       Global.Mu.H2  = 0.00;          % H2                          [debyes]
       Global.Mu.H2O = 1.80;          % H2O                         [debyes]
       Global.Mu.N2  = 0.00;          % N2                          [debyes]
+% ---------- heat reaction - values ---------------------------------------
+      Global.HR.nReactions       = 3;   % Number of reactions            []
+      Global.HR.To               = 298; % standar temperature           [K]
+% ---------- dry reforming of methane -------------------------------------
+      Global.HR.reactions.DRM.nReactans    = 2;
+      Global.HR.reactions.DRM.nProducts    = 2;
+      Global.HR.reactions.DRM.reactants    = {'CH4', 'CO2'};
+      Global.HR.reactions.DRM.stqReactants = [1, 1];
+      Global.HR.reactions.DRM.products     = {'CO', 'H2'};
+      Global.HR.reactions.DRM.stqProducts  = [2, 2];
+      Global.HR.reactions.DRM.standarHR    = 247;% standar h-r     [KJ/mol]
+% ---------- reverse water gas shift --------------------------------------
+      Global.HR.reactions.RWGS.nReactans    = 2;
+      Global.HR.reactions.RWGS.nProducts    = 2;
+      Global.HR.reactions.RWGS.reactants    = {'CO2', 'H2'};
+      Global.HR.reactions.RWGS.stqReactants = [1, 1];
+      Global.HR.reactions.RWGS.products     = {'CO', 'H2O'};
+      Global.HR.reactions.RWGS.stqProducts  = [1, 1];
+      Global.HR.reactions.RWGS.standarHR    = 41;% standar h-r     [KJ/mol]
+% ---------- methane cracking ---------------------------------------------
+      Global.HR.reactions.MC.nReactans    = 1;
+      Global.HR.reactions.MC.nProducts    = 2;
+      Global.HR.reactions.MC.reactants    = {'CH4'};
+      Global.HR.reactions.MC.stqReactants = 1;
+      Global.HR.reactions.MC.products     = {'C', 'H2'};
+      Global.HR.reactions.MC.stqProducts  = [1, 2];
+      Global.HR.reactions.MC.standarHR    = 74.9;% standar h-r     [KJ/mol]
 % ------------------------- END globalData-function -----------------------
 end
