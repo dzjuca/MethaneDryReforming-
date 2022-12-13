@@ -263,6 +263,8 @@ function Global = globalData()
       Global.HR.reactions.DRM.products     = {'CO', 'H2'};
       Global.HR.reactions.DRM.stqProducts  = [2, 2];
       Global.HR.reactions.DRM.standarHR    = 247;% standar h-r     [KJ/mol]
+      Global.HR.reactions.DRM.speciesStateReactants = {'Gas'};
+      Global.HR.reactions.DRM.speciesStateProducts  = {'Gas'};
 % ---------- reverse water gas shift --------------------------------------
       Global.HR.reactions.RWGS.nReactans    = 2;
       Global.HR.reactions.RWGS.nProducts    = 2;
@@ -271,13 +273,35 @@ function Global = globalData()
       Global.HR.reactions.RWGS.products     = {'CO', 'H2O'};
       Global.HR.reactions.RWGS.stqProducts  = [1, 1];
       Global.HR.reactions.RWGS.standarHR    = 41;% standar h-r     [KJ/mol]
+      Global.HR.reactions.RWGS.speciesStateReactants = {'Gas'};
+      Global.HR.reactions.RWGS.speciesStateProducts  = {'Gas'};
 % ---------- methane cracking ---------------------------------------------
       Global.HR.reactions.MC.nReactans    = 1;
       Global.HR.reactions.MC.nProducts    = 2;
       Global.HR.reactions.MC.reactants    = {'CH4'};
       Global.HR.reactions.MC.stqReactants = 1;
-      Global.HR.reactions.MC.products     = {'C', 'H2'};
+      Global.HR.reactions.MC.products     = {'graphite', 'H2'};
       Global.HR.reactions.MC.stqProducts  = [1, 2];
       Global.HR.reactions.MC.standarHR    = 74.9;% standar h-r     [KJ/mol]
+      Global.HR.reactions.MC.speciesStateReactants = {'Gas'};
+      Global.HR.reactions.MC.speciesStateProducts  = {'Sol'};
+% ---------- C - heat capacity fit [298.15 K - 4100 K]
+      T_graphite = [298.15; 300.00; 400.00; 500.00; 600.00; 700.00; 800.00; 
+      900.00; 1000.0; 1100.0; 1200.0; 1300.0; 1400.0; 1500.0; 1600.0; 
+      1700.0; 1800.0; 1900.0; 2000.0; 2100.0; 2200.0; 2300.0; 2400.0; 
+      2500.0; 2600.0; 2700.0; 2800.0; 2900.0; 3000.0; 3100.0; 3200.0; 
+      3300.0; 3400.0; 3500.0; 3600.0; 3700.0; 3800.0; 3900.0; 4000.0; 
+      4100.0];
+      Cp_graphite = [8.512; 8.5940; 11.927; 14.633; 16.884; 18.590; 19.827; 
+      20.792; 21.566; 22.192; 22.702; 23.117; 23.453; 23.725; 23.946; 
+      24.127; 24.278; 24.410; 24.533; 24.648; 24.745; 24.835; 24.919; 
+      24.997; 25.071; 25.142; 25.211; 25.278; 25.344; 25.409; 25.473; 
+      25.537; 25.601; 25.665; 25.730; 25.795; 25.861; 25.928; 25.996; 
+      26.066];
+
+      [xData, yData]    = prepareCurveData( T_graphite, Cp_graphite );
+      [cpGraphiteFit, ~]   = fit( xData, yData, ft );
+      Global.HR.reactions.MC.cpSolidSpecies.graphite  = ...
+                                              cpGraphiteFit;%     [J/Mol K]
 % ------------------------- END globalData-function -----------------------
 end
