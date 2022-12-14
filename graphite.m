@@ -2,6 +2,8 @@ clc
 clear 
 close all
 
+R = 8.31446261815324;
+
 T = [298.15; 300.00; 400.00; 500.00; 600.00; 700.00; 800.00; 900.00; 1000.0;
      1100.0; 1200.0; 1300.0; 1400.0; 1500.0; 1600.0; 1700.0; 1800.0; 1900.0; 
      2000.0; 2100.0; 2200.0; 2300.0; 2400.0; 2500.0; 2600.0; 2700.0; 2800.0;
@@ -12,6 +14,8 @@ Cp = [8.512; 8.5940; 11.927; 14.633; 16.884; 18.590; 19.827; 20.792; 21.566;
      24.533; 24.648; 24.745; 24.835; 24.919; 24.997; 25.071; 25.142; 25.211;
      25.278; 25.344; 25.409; 25.473; 25.537; 25.601; 25.665; 25.730; 25.795;
      25.861; 25.928; 25.996; 26.066];
+
+Cp_N = Cp./R;
 
 
 %CREATEFIT(T,CP)
@@ -43,21 +47,22 @@ Cp = [8.512; 8.5940; 11.927; 14.633; 16.884; 18.590; 19.827; 20.792; 21.566;
 
 
 % ---------
- [xData, yData] = prepareCurveData( T, Cp );
+ [xData, yData] = prepareCurveData( T, Cp_N );
 
 % Set up fittype and options.
-ft = fittype( 'smoothingspline' );
+ft = fittype( 'poly6' );
+opts = fitoptions( 'Method', 'LinearLeastSquares' );
+opts.Normalize = 'on';
+opts.Robust = 'Bisquare';
 
 % Fit model to data.
-[fitresult, gof] = fit( xData, yData, ft );
-
-% ---------
+[fitresult, gof] = fit( xData, yData, ft, opts );
 
 % Plot fit with data.
-figure( 'Name', 'untitled fit 2' );
+figure( 'Name', 'untitled fit 1' );
 h = plot( fitresult, xData, yData );
-legend( h, 'Cp vs. T', 'Fit', 'Location', 'NorthEast', 'Interpreter', 'none' );
+legend( h, 'Cp_N vs. T', 'untitled fit 1', 'Location', 'NorthEast', 'Interpreter', 'none' );
 % Label axes
-xlabel( 'T [K]', 'Interpreter', 'none' );
-ylabel( 'Cp [J/mol K]', 'Interpreter', 'none' );
+xlabel( 'T', 'Interpreter', 'none' );
+ylabel( 'Cp_N', 'Interpreter', 'none' );
 grid on
