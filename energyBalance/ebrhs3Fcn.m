@@ -1,10 +1,12 @@
-function ebrhs3 = ebrhs3Fcn(alpha, Global, Tbe)
+function ebrhs3 = ebrhs3Fcn(alpha, Global, Cgas, Tbe)
 % -------------------------------------------------------------------------
   % ebrhs3 function 
   % ----------------------------| input |----------------------------------
-  %   alpha = fraction of bubbles in bed                                 []
-  %  Global = constant values structure 
-  %     Tbe = bubble|emulsion temperature                               [K]
+  %     alpha = fraction of bubbles in bed                               []
+  %    Global = constant values structure 
+  %      Cgas = a vector with all concentrations species 
+  %             bubble|emulsion                                   [mol/cm3] 
+  %       Tbe = bubble|emulsion temperature                             [K]
   % -----
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
@@ -34,7 +36,7 @@ function ebrhs3 = ebrhs3Fcn(alpha, Global, Tbe)
 
     reaction = Global.HR.reactions.(r_fields{i});
     heatReaction(:, i) = heatReactionFcn(reaction, To, Tbe, R, hcc);
-         kinetic(:, i) = kineticFcn();
+         kinetic(:, i) = CineticaFcn(Cgas, Global, r_fields{i});
 
   end
 
