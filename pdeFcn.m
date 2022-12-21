@@ -177,16 +177,16 @@ global ncall
 % -------------------------------------------------------------------------
 % --------------------| Energy Balance - Temperature - Bubble Phase |------
 % ----- constant value ----------------------------------------------------
-    EBCF1 = 1./eblhsFcn(alpha, Global, CTBW, u8b);
-    u8bt  = - ebrhs1Fcn(alpha, Global, CTBW, u8b, ub).*EBCF1        ...
+    EBCF1 = 1./eblhsFcn(alpha, Global, CTBW, u8b, 'bubble');
+    u8bt  = (- ebrhs1Fcn(alpha, Global, CTBW, u8b, ub)              ...
             + ebrhs2Fcn(alpha, Global, CTBW, CTE, u8b, u8e, ub, db) ...
-            + ebrhs3Fcn(alpha, Global, CTBW, u8b) ...
+            + ebrhs3Fcn(alpha, Global, CTBW, u8b)                   ...
             + ebrhs4Fcn(alpha, Global, CTBW, CTE, u8b, u8e, ub)     ...
-            + ebrhs5Fcn(alpha, Global,  u8b, u8e, ub);
+            + ebrhs5Fcn(alpha, Global,  u8b, u8e, ub)).*EBCF1;
 % --------------------| Energy Balance - Temperature - Emulsion Phase |----
 % ----- constant value ----------------------------------------------------
-% EBCF2 = 1./eblhsFcn(alpha, Global, CTE, u8e);
-    u8et = zeros(index1,1); 
+    EBCF2 = 1./eblhsFcn(alpha, Global, CTE, u8e, 'emulsion');
+    u8et  = (zeros(index1,1)).*EBCF2; 
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------

@@ -1,11 +1,12 @@
-function eblhs = eblhsFcn(alpha, Global, Cgas, T)
+function eblhs = eblhsFcn(alpha, Global, Cgas, T, identifier)
 % -------------------------------------------------------------------------
   % eblhsFcn function 
   % ----------------------------| input |----------------------------------
-  %   alpha = fraction of bubbles in bed                                 []
-  %  Global = constant values structure 
-  %    Cgas = concentration vector of each species                [mol/cm3]
-  %       T = temperature                                               [K]
+  %       alpha = fraction of bubbles in bed                             []
+  %      Global = constant values structure 
+  %        Cgas = concentration vector of each species            [mol/cm3]
+  %           T = temperature                                           [K]
+  %  identifier = phase identifier (bubble|emulsion)                     []
   % -----
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
@@ -25,8 +26,21 @@ function eblhs = eblhsFcn(alpha, Global, Cgas, T)
   Cps  = cpSolMixFcn(Global, T);
   Cg   = cGasMixFcn(Cgas(:,1:gen));
 
-  eblhs = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg) + ...
-            alpha.*fw.*(1 - Emf).*Dsol.*Cps;
+  if strcmp( identifier, 'bubble')
+
+    eblhs = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg) + ...
+              alpha.*fw.*(1 - Emf).*Dsol.*Cps;
+
+  elseif strcmp( identifier, 'emulsion')
+
+    eblhs = ((1 - alpha - alpha.*fw).*Emf.*Cpg.*Cg) + ...
+            ((1 - alpha - alpha.*fw).*(1 - Emf).*Dsol.*Cps);
+
+  else
+
+    disp('Error - eblhsFcn function - identifier ')
+
+  end
 % -------------------------------------------------------------------------
 end
 
