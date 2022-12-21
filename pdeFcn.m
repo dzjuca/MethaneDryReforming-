@@ -185,7 +185,7 @@ global ncall
             + ebrhs5Fcn(alpha, Global,  u8b, u8e, ub)).*EBCF1;
 % --------------------| Energy Balance - Temperature - Emulsion Phase |----
 % ----- constant value ----------------------------------------------------
-    EBCF2 = 1./eblhsFcn(alpha, Global, CTE, u8e, 'emulsion');
+   % EBCF2 = 1./eblhsFcn(alpha, Global, CTE, u8e, 'emulsion');
     u8et  = (zeros(index1,1)).*EBCF2; 
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
