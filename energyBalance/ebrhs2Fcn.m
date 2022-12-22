@@ -29,6 +29,3 @@ function ebrhs2 = ebrhs2Fcn(alpha, Global, Cgas_b, Cgas_e, Tb, Te, ub, db)
     ebrhs2 = (alpha + alpha.*fw.*Emf).*Hbe.*(Te - Tb);
 % -------------------------------------------------------------------------
 end
-
-  %     y_i = molar fraction of each species                             []  
-  %     y_i = molarFractionFcn(Cgas_b(:,1:gen));

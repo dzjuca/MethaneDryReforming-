@@ -1,4 +1,4 @@
-function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes)
+function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes, identifier)
 % -------------------------------------------------------------------------
   % ebrhs1 function 
   % ----------------------------| input |----------------------------------
@@ -7,6 +7,7 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes)
   %    Cgas = concentration vector of each species                [mol/cm3]
   %       T = temperature                                               [K]
   %    ubes = velocity (gas-bubble/gas-emulsion/solid)               [cm/s]
+  %  identifier = phase identifier (bubble|emulsion)                     []
   % -----
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
@@ -35,11 +36,25 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes)
     zu   = zg(end);
     n    = length(zg);
 
+    if strcmp( identifier, 'bubble')
 
-    temporal_1 = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg.*ubes);
-    temporal_2 = (alpha.*fw.*(1 - Emf).*Dsol.*ubes.*Cps);
-          dTdz = dss004(zl,zu,n,T)';
+      temporal_1 = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg.*ubes);
+      temporal_2 = (alpha.*fw.*(1 - Emf).*Dsol.*ubes.*Cps);
+
+    elseif strcmp( identifier, 'emulsion')
+
+      temporal_1 = ((1 - alpha - alpha.*fw).*Emf.*Cpg.*Cg.*ubes(1));
+      temporal_2 = ((1 - alpha - alpha.*fw).*(1 - Emf).*Dsol.*ubes(2).*Cps);
+
+    else
+  
+      disp('Error - ebrhs1Fcn function - identifier')
+  
+    end
+
+    dTdz = dss004(zl,zu,n,T)';
     ebrhs1     = (temporal_1 + temporal_2).*dTdz;
+
 % -------------------------------------------------------------------------
 
 end

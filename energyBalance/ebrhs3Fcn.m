@@ -1,12 +1,13 @@
-function ebrhs3 = ebrhs3Fcn(alpha, Global, Cgas, Tbe)
+function ebrhs3 = ebrhs3Fcn(alpha, Global, Cgas, Tbe, identifier)
 % -------------------------------------------------------------------------
   % ebrhs3 function 
   % ----------------------------| input |----------------------------------
-  %     alpha = fraction of bubbles in bed                               []
-  %    Global = constant values structure 
-  %      Cgas = a vector with all concentrations species 
-  %             bubble|emulsion                                   [mol/cm3] 
-  %       Tbe = bubble|emulsion temperature                             [K]
+  %       alpha = fraction of bubbles in bed                             []
+  %      Global = constant values structure 
+  %        Cgas = a vector with all concentrations species 
+  %               bubble|emulsion                                 [mol/cm3] 
+  %         Tbe = bubble|emulsion temperature                           [K]
+  %  identifier = phase identifier (bubble|emulsion)                     []
   % -----
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
@@ -41,6 +42,21 @@ function ebrhs3 = ebrhs3Fcn(alpha, Global, Cgas, Tbe)
   end
 
   temporal_1 = sum((heatReaction.*kinetic),2);
-      ebrhs3 = alpha.*fw.*(1 - Emf).*temporal_1.*Dsol;
+
+  if strcmp( identifier, 'bubble')
+
+    temporal_2 = alpha.*fw.*(1 - Emf).*Dsol;
+
+  elseif strcmp( identifier, 'emulsion')
+
+    temporal_2 = (1 - alpha - alpha.*fw).*(1 - Emf).*Dsol;
+
+  else
+
+    disp('Error - ebrhs1Fcn function - identifier')
+
+  end
+
+  ebrhs3 = temporal_1.*temporal_2;
 % -------------------------------------------------------------------------
 end
