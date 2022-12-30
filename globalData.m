@@ -70,6 +70,7 @@ function Global = globalData()
       Global.cAl2O3  = 0.85;   % alumina concentration      [g.Al2O3/g.cat]
       Global.cNickel = 0.05;   % nickel concentration          [g.Ni/g.cat]
       Global.cCeria  = 0.10;   % ceria concentration           [g.Ce/g.cat]
+      Global.dparticle = 0.0143;  % particle diameter                  [cm]
 % ---------- fluidized bed constant data ----------------------------------
       Global.umf = (16.093/60.0); % minimum fluidization velocity    [cm/s] 
       Global.fw  = 0.15;          % fraction of wake in bubbles         [ ]
@@ -158,6 +159,9 @@ function Global = globalData()
       Global.EK(5)    = 809.1;        % - H2O                           [K]
       Global.EK(6)    = 71.40;        % - N2                            [K]
 % -------------------- | Energy Balance| ----------------------------------
+% ---------- overral heat transfer coefficient ----------------------------
+      Global.OHTC.E = 0.4;            % 0.4 for design                   []
+      Global.OHTC.m = 6.0;            % 6.0 for design                   []
 % ---------- gas - heat capacity constants --------------------------------
       Global.HCC.CH4 = [4.568, -8.975e-3, 3.631e-5, -3.407e-8, 1.091e-11];
       Global.HCC.CO2 = [3.259,  1.356e-3, 1.502e-5, -2.374e-8, 1.056e-11];           
