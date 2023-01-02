@@ -1,7 +1,7 @@
-function U = overallHTCFcn(alpha, Global, Te, Cgas, db)
+function U = overallHTCFcn(alpha, Global, T, Cgas, db)
 
-    hpc = hpcFcn(alpha, Global, Te, Cgas, db);
-    hgc = hgcFcn();
+    hpc = hpcFcn(alpha, Global, T, Cgas, db);
+    hgc = hgcFcn(Global, T, Cgas, db);
     hr  = hrFcn();
 
 

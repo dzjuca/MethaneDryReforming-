@@ -1,12 +1,22 @@
-function mui = viscosityGasFcn(Tb, Tc, Pc, mu, Vc, M, T)
-
-    % a   = Hcc(i,:);
-
-    k = 0; % ==================> revisar valor
-
+function mui = viscosityGasFcn( T, Tb, Tc, Pc, Vc, mu, M, k)
+% -------------------------------------------------------------------------
+    % viscosityGasFcn-function calculates the viscosity of unique gas
+    % specie
+    % ----------------------------| input |--------------------------------
+    % T   = bubble|emulsion temperature                                 [K]
+    % Tb  = temperature experimental was used to determine Tc and Pc,   [k]
+    % Tc  = temperature, critical constant for each specie              [k]
+    % Pc  = pressure, critical constant for each specie               [bar]
+    % Vc  = volume, critical constant for each specie             [cm3/mol]
+    % mu  = dipole moment                                          [debyes]
+    % M   = molecular weight                                        [g/mol]
+    % k   = factor correction, k = 0                                     []
+    % ----------------------------| output |-------------------------------
+    % mui = viscosity of pure gas species                           [xxxxx]  % ==================> revisar valor
+% -------------------------------------------------------------------------
     Tbr = Tb/Tc;
     Tao = (1 - Tbr);
-    Tr  = T./Tc; % ==================> revisar valor
+    Tr  = T./Tc;                                      % ==================> revisar valor
 % -------------------------------------------------------------------------
     f0 = (- 5.97616*(Tao) + 1.29874*(Tao)^(1.5) ...
           - 0.60394*(Tao)^(2.5) - 1.06841*(Tao)^(5))/Tbr;
@@ -27,5 +37,4 @@ function mui = viscosityGasFcn(Tb, Tc, Pc, mu, Vc, M, T)
 % -------------------------------------------------------------------------
     mui  = (40.785.*(Fc.*(M.*T).^(1/2))./((Vc^(2/3)).*omega_v)).*1e-6;
 % -------------------------------------------------------------------------
-
 end
