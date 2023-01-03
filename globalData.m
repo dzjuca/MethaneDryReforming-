@@ -162,6 +162,9 @@ function Global = globalData()
 % ---------- overral heat transfer coefficient ----------------------------
       Global.OHTC.E = 0.4;            % 0.4 for design                   []
       Global.OHTC.m = 6.0;            % 6.0 for design                   []
+      Global.OHTC.sigma  = 5.67e-8;   % Stefan-Boltzman-coef       [W/m2K4]
+      Global.OHTC.k_wall = 0.8;       % Emissivity-wall                  []
+      Global.OHTC.k_bed  = 0.8;       % Emissivity-bed                   []
 % ---------- gas - heat capacity constants --------------------------------
       Global.HCC.CH4 = [4.568, -8.975e-3, 3.631e-5, -3.407e-8, 1.091e-11];
       Global.HCC.CO2 = [3.259,  1.356e-3, 1.502e-5, -2.374e-8, 1.056e-11];           
@@ -210,6 +213,32 @@ function Global = globalData()
       [xData, yData]    = prepareCurveData( T_ceria, Cp_ceria );
       [cpCeriaFit, ~]   = fit( xData, yData, ft );
       Global.cpCeriaFit = cpCeriaFit;
+% ---------- solid - thermal conductivity ---------------------------------
+      ft_tc = 'linearinterp';
+% ---------- alumina - heat capacity fit [10 - 1400 k] --------------------
+      T_alumina_tc = [10; 20; 40; 60; 80; 100; 200; 300; 400; 500; ...
+                      600; 800; 1000; 1200; 1400];
+      tc_alumina   = [7; 32; 121; 174; 160; 125; 55; 36; 26; 20;   ... 
+                      16; 10; 8; 7; 6];
+      [xData, yData]      = prepareCurveData( T_alumina_tc, tc_alumina );
+      [tcAluminaFit, ~]   = fit( xData, yData, ft_tc );
+      Global.tcAluminaFit = tcAluminaFit;
+% ---------- nickel  - heat capacity fit [10 - 1400 k] --------------------
+      T_nickel_tc = [10; 20; 40; 60; 80; 100; 200; 300; 400; 500; 600; ...
+                     800; 1000; 1200; 1400];
+      tc_nickel   = [2600; 1700; 570; 290; 200; 158; 106; 91; 80; 72;  ... 
+                     66; 67; 72; 76; 80];
+      [xData, yData]     = prepareCurveData( T_nickel_tc, tc_nickel );
+      [tcNickelFit, ~]   = fit( xData, yData, ft_tc );
+      Global.tcNickelFit = tcNickelFit;
+% ---------- ceria   - heat capacity fit [10 - 1400 k] --------------------
+      T_ceria_tc = [10; 20; 40; 60; 80; 100; 200; 300; 400; 500; 600; ...
+                    800; 1000; 1200; 1400];
+      tc_ceria   = [2600; 1700; 570; 290; 200; 158; 106; 91; 80; 72;  ... 
+                    66; 67; 72; 76; 80];
+      [xData, yData]    = prepareCurveData( T_ceria_tc, tc_ceria );
+      [tcCeriaFit, ~]   = fit( xData, yData, ft_tc );
+      Global.tcCeriaFit = tcCeriaFit;
 % ---------- molar mass for each specie -----------------------------------
       Global.MM.CH4 = 16.0426;      % - CH4                         [g/mol]
       Global.MM.CO2 = 44.0090;      % - CO2                         [g/mol]
