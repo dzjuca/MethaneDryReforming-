@@ -78,44 +78,48 @@ function Global = globalData()
 % ---------- fluid constant data ------------------------------------------
       Global.usg0 = ...
                   Global.QT_in./(Global.A*60.0);% Initial Flow Rate  [cm/s]
+% ---------- Kinetic Data Dry Reforming Of Methane ------------------------
+      Global.kinetic.R = 8.314472e-3; % Universal Gas Constant    [kJ/molK] 
+      Global.kinetic.Tref = (475.0 + 273.15); % reference temperature   [K]
+      Global.kinetic.Tc   = (512.5 + 273.15); % reference temperature   [K]
 % ---------- kinetic constants - pre-exponential factor -------------------
-      k1o = (10.87270/3600);      % - DRM                      [mol/gcat.s]
-      k2o = (716.0353/3600);      % - WGSR                     [mol/gcat.s]
-      k3o = (0.542000/3600);      % - Cracking                 [mol/gcat.s]
+      Global.kinetic.k1o = (10.87270/3600);      % - DRM       [mol/gcat.s]
+      Global.kinetic.k2o = (716.0353/3600);      % - WGSR      [mol/gcat.s]
+      Global.kinetic.k3o = (0.542000/3600);      % - Cracking  [mol/gcat.s]
 % ---------- kinetic constants - activation energy ------------------------
-      Ea1 = (127.1485);           % - DRM                          [kJ/mol]
-      Ea2 = (115.6120);           % - WGSR                         [kJ/mol]
-      Ea3 = (41.92570);           % - Cracking                     [kJ/mol]
+      Global.kinetic.Ea1 = (127.1485);           % - DRM           [kJ/mol]
+      Global.kinetic.Ea2 = (115.6120);           % - WGSR          [kJ/mol]
+      Global.kinetic.Ea3 = (41.92570);           % - Cracking      [kJ/mol]
 % ---------- adsorption constants - pre-exponential factor ----------------
-      KCH4o  = (3.024100);%                                         [bar-1]
-      KCO2o  = (0.436300);%                                         [bar-1]
-      KH2o   = (39.93190);%                                         [bar-1]
+      Global.kinetic.KCH4o  = (3.024100);%                          [bar-1]
+      Global.kinetic.KCO2o  = (0.436300);%                          [bar-1]
+      Global.kinetic.KH2o   = (39.93190);%                          [bar-1]
 % ---------- adsorption constants - adsorption enthalpy -------------------
-      EaKCH4 = (202.1454);%                                        [kJ/mol]
-      EaKCO2 = (25.33140);%                                        [kJ/mol] 
-      EaKH2  = (102.7949);%                                        [kJ/mol]
+      Global.kinetic.EaKCH4 = (202.1454);%                         [kJ/mol]
+      Global.kinetic.EaKCO2 = (25.33140);%                         [kJ/mol] 
+      Global.kinetic.EaKH2  = (102.7949);%                         [kJ/mol]
 % -- thermodynamic equilibrium constants - pre-exponential factor ---------
-      KP1o   = (0.005500);        % - DRM                           [bar^2]
-      KP2o   = (0.226600);        % - WGSR                              [ ]
-      KP3o   = (0.025900);        % - Cracking                        [bar]
+      Global.kinetic.KP1o   = (0.005500);        % - DRM            [bar^2]
+      Global.kinetic.KP2o   = (0.226600);        % - WGSR               [ ]
+      Global.kinetic.KP3o   = (0.025900);        % - Cracking         [bar]
 % -- thermodynamic equilibrium constants - activation energy --------------
-      EaKP1  = (265.6100);        % - DRM                          [kJ/mol]
-      EaKP2  = (38.06000);        % - WGSR                         [kJ/mol]
-      EaKP3  = (143.4945);        % - Cracking                     [kJ/mol]
+      Global.kinetic.EaKP1  = (265.6100);        % - DRM           [kJ/mol]
+      Global.kinetic.EaKP2  = (38.06000);        % - WGSR          [kJ/mol]
+      Global.kinetic.EaKP3  = (143.4945);        % - Cracking      [kJ/mol]
 % ---------- deactivation constants - pre-exponential factor --------------
-      KD1o   = (1.076200/60);%                                        [s-1]
-      KD2o   = (242.6530/60);%                                        [s-1]
-      KR1o   = (0.430300/60);%                                        [s-1]
-      KAD1o  = (0.141900000);%                                      [bar-2]
-      KAD2o  = (0.774700000);%                                      [bar-4]
-      KAD3o  = (0.071000000);%                                      [bar-1]
+      Global.kinetic.KD1o   = (1.076200/60);%                         [s-1]
+      Global.kinetic.KD2o   = (242.6530/60);%                         [s-1]
+      Global.kinetic.KR1o   = (0.430300/60);%                         [s-1]
+      Global.kinetic.KAD1o  = (0.141900000);%                       [bar-2]
+      Global.kinetic.KAD2o  = (0.774700000);%                       [bar-4]
+      Global.kinetic.KAD3o  = (0.071000000);%                       [bar-1]
 % ---------- deactivation constants - adsorption enthalpy -----------------
-      EaKD1  = (131.9587000);%                                     [kJ/mol]
-      EaKD2  = (195.8497000);%                                     [kJ/mol]
-      EaKR1  = (503.3361000);%                                     [kJ/mol]
-      EaKAD1 = (267.8376000);%                                     [kJ/mol]
-      EaKAD2 = (572.8522000);%                                     [kJ/mol]
-      EaKAD3 = (570.9836000);%                                     [kJ/mol]
+      Global.kinetic.EaKD1  = (131.9587000);%                      [kJ/mol]
+      Global.kinetic.EaKD2  = (195.8497000);%                      [kJ/mol]
+      Global.kinetic.EaKR1  = (503.3361000);%                      [kJ/mol]
+      Global.kinetic.EaKAD1 = (267.8376000);%                      [kJ/mol]
+      Global.kinetic.EaKAD2 = (572.8522000);%                      [kJ/mol]
+      Global.kinetic.EaKAD3 = (570.9836000);%                      [kJ/mol]
 % ---------- kinetic constants calculate  ---------------------------------
   Global.k1   =   k1o*exp((-Ea1/Global.R)  *((1/Global.T)-(1/Global.Tc)));
   Global.k2   =   k2o*exp((-Ea2/Global.R)  *((1/Global.T)-(1/Global.Tc)));
@@ -213,9 +217,9 @@ function Global = globalData()
       [xData, yData]    = prepareCurveData( T_ceria, Cp_ceria );
       [cpCeriaFit, ~]   = fit( xData, yData, ft );
       Global.cpCeriaFit = cpCeriaFit;
-% ---------- solid - thermal conductivity ---------------------------------
+% ---------- solid - thermal conductivity [W/mK] --------------------------
       ft_tc = 'linearinterp';
-% ---------- alumina - heat capacity fit [10 - 1400 k] --------------------
+% ---------- alumina - thermal conductivity fit [10 - 1400 k] -------------
       T_alumina_tc = [10; 20; 40; 60; 80; 100; 200; 300; 400; 500; ...
                       600; 800; 1000; 1200; 1400];
       tc_alumina   = [7; 32; 121; 174; 160; 125; 55; 36; 26; 20;   ... 
@@ -223,7 +227,7 @@ function Global = globalData()
       [xData, yData]      = prepareCurveData( T_alumina_tc, tc_alumina );
       [tcAluminaFit, ~]   = fit( xData, yData, ft_tc );
       Global.tcAluminaFit = tcAluminaFit;
-% ---------- nickel  - heat capacity fit [10 - 1400 k] --------------------
+% ---------- nickel  - thermal conductivity fit [10 - 1400 k] -------------
       T_nickel_tc = [10; 20; 40; 60; 80; 100; 200; 300; 400; 500; 600; ...
                      800; 1000; 1200; 1400];
       tc_nickel   = [2600; 1700; 570; 290; 200; 158; 106; 91; 80; 72;  ... 
@@ -231,7 +235,7 @@ function Global = globalData()
       [xData, yData]     = prepareCurveData( T_nickel_tc, tc_nickel );
       [tcNickelFit, ~]   = fit( xData, yData, ft_tc );
       Global.tcNickelFit = tcNickelFit;
-% ---------- ceria   - heat capacity fit [10 - 1400 k] --------------------
+% ---------- ceria   - thermal conductivity [10 - 1400 k] -----------------
       T_ceria_tc = [10; 20; 40; 60; 80; 100; 200; 300; 400; 500; 600; ...
                     800; 1000; 1200; 1400];
       tc_ceria   = [2600; 1700; 570; 290; 200; 158; 106; 91; 80; 72;  ... 

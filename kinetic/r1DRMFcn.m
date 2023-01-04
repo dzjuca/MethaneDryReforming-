@@ -1,11 +1,28 @@
-function r1 = r1DRMFcn( PCH4, PCO2, PCO, PH2, Global )
+function r1 = r1DRMFcn( PCH4, PCO2, PCO, PH2, kinetic, T)
+% -------------------- MODELO DRM -----------------------------------------
 
-    % -------------------- MODELO DRM -----------------------------------------
+% R = 8.314472e-3; % Universal Gas Constant    [kJ/molK] 
 
-    k1      = Global.k1;
-    KCH4    = Global.KCH4;
-    KCO2    = Global.KCO2;
-    KP1     = Global.KP1;
+R = kinetic.R;
+Tc = kinetic.Tc;
+k1o = kinetic.k1o;
+Ea1 = kinetic.Ea1;
+KCH4o = kinetic.KCH4o;
+EaKCH4 = kinetic.EaKCH4;
+KCO2o = kinetic.KCO2o;
+EaKCO2 = kinetic.EaKCO2;
+KP1o = kinetic.KP1o;
+EaKP1 = kinetic.EaKP1;
+
+
+
+
+    k1      = k1o*exp((-Ea1/R)  *((1/T)-(1/Tc)));
+    KCH4    = KCH4o*exp((EaKCH4/R)*((1/T)-(1/Tc)));
+    KCO2    = KCO2o*exp((EaKCO2/R)*((1/T)-(1/Tc)));
+    KP1     = KP1o*exp((-EaKP1/R)*((1/T)-(1/Tc)));
+
+
     factor1 = PCH4*PCO2*KP1;
     factor2 = PCO^2*PH2^2/factor1;  
 
@@ -14,3 +31,4 @@ function r1 = r1DRMFcn( PCH4, PCO2, PCO, PH2, Global )
     r1          = (k1*KCH4*KCO2*PCH4*PCO2/factor3)*(1-factor2);
 
 end
+

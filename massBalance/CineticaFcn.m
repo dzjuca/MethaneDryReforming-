@@ -1,9 +1,10 @@
-function cinetica = CineticaFcn(Cgas, Global, caracter2)
+function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
 % -------------------------------------------------------------------------
   % CineticaFcn function 
   % ----------------------------| input |----------------------------------
   %        Cgas = concentration vector of each species            [mol/cm3]
   %      Global = constant values structure 
+  %         Tbe = phase temperature                                     [K]
   %   caracter2 = species|reaction identifier
   % ----------------------------| output |---------------------------------
   %  cinetica = right-hand side term-3                            [J/s cm3]
@@ -14,6 +15,7 @@ function cinetica = CineticaFcn(Cgas, Global, caracter2)
     r2     = zeros(index1,1);
     r3     = zeros(index1,1);
     rCoke  = zeros(index1,1);
+    kinetic = Global.kinetic;
 
     for  i = 1:index1 
 
@@ -22,9 +24,9 @@ function cinetica = CineticaFcn(Cgas, Global, caracter2)
         PPT  = partialPressureFcn(CT(1:6));
         PCH4 = PPT(1); PCO2 = PPT(2); PCO = PPT(3); 
         PH2  = PPT(4); PH2O = PPT(5);  
-
+        T    = Tbe(i);
         a        = activityFcn( Cc, Global);   
-        r1(i)    = r1DRMFcn(PCH4,PCO2,PCO,PH2,Global)*a;
+        r1(i)    = r1DRMFcn(PCH4, PCO2, PCO, PH2, kinetic, T)*a; % ========> aqui quedamos, falta arreglar los otros factores y hacer reverso
         r2(i)    = r2RWGSFcn(PCO2,PCO,PH2,PH2O,Global)*a;
         r3(i)    = r3MCFcn(PCH4,PH2,Global)*a;
         rCoke(i) = rCokeFcn(Cc,PCH4,PCO2,PCO,PH2,Global)*a;

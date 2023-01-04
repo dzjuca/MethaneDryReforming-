@@ -35,7 +35,7 @@ function hpc = hpcFcn(alpha, Global, T, Cgas, db)
     Cp_gas_mix = cpGasMixFcn(Global, Cgas, T);
     Cp_sol_mix = cpSolMixFcn(Global, T);
     kg = thermalCondMixGasFcn(Global, T, Cgas);
-    ks = thermalCondMixSolFcn();                                           % =========> pendiente de calcular
+    ks = thermalCondMixSolFcn(Global, T);                                
 % -------------------------------------------------------------------------
     ks_kg = ks./kg;
     tmp_1 = 0.28 - 0.757.*log10(E) - 0.057.*log10(ks_kg);
