@@ -1,11 +1,18 @@
 function PPT = partialPressureFcn(CT)
-
-% -------------------- PRESIONES PARCIALES --------------------------------
-
+% -------------------------------------------------------------------------
+    % partialPressureFcn - is a function that calculates the 
+    % partial pressure
+    % ----------------------------| input |--------------------------------
+    %   CT = the concentration of the species in the reactor      [mol/cm3]
+    % ----------------------------| output |-------------------------------
+    %  PPT =  the partial pressure of the species in the reactor      [bar]
+% -------------------------------------------------------------------------
 
     CCH4 = CT(1); CCO2 = CT(2); CCO = CT(3); 
     CH2 = CT(4); CH2O = CT(5); CN2 = CT(6);  
     CTsuma = sum(CT(1:6));
+
+% -------------------------------------------------------------------------
 
     if sum(CT(1:6)) == 0
                 PCH4 = 0.0; PCO2 = 0.0; PCO = 0.0;
@@ -22,4 +29,5 @@ function PPT = partialPressureFcn(CT)
                 PPT = [PCH4,PCO2,PCO,PH2,PH2O,PN2];
     end
 
+% -------------------------------------------------------------------------
 end
