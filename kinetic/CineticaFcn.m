@@ -7,7 +7,7 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
   %         Tbe = phase temperature                                     [K]
   %   caracter2 = species|reaction identifier
   % ----------------------------| output |---------------------------------
-  %  cinetica = right-hand side term-3                            [J/s cm3]
+  %   cinetica = reaction rate of each species                 [mol/gcat s]                       
 % -------------------------------------------------------------------------
     zg     = Global.zg;
     index1 = length(zg);

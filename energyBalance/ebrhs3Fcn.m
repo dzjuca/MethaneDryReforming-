@@ -37,7 +37,7 @@ function ebrhs3 = ebrhs3Fcn(alpha, Global, Cgas, Tbe, identifier)
 
     reaction = Global.HR.reactions.(r_fields{i});
     heatReaction(:, i) = heatReactionFcn(reaction, To, Tbe, R, hcc);
-         kinetic(:, i) = CineticaFcn(Cgas, Global, r_fields{i});
+         kinetic(:, i) = CineticaFcn(Cgas, Global, Tbe, r_fields{i});
 
   end
 
