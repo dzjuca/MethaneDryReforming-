@@ -16,7 +16,7 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
     r3     = zeros(index1,1);
     rCoke  = zeros(index1,1);
     kinetic = Global.kinetic;
-
+% -------------------------------------------------------------------------
     for  i = 1:index1 
 
         CT   = Cgas(i,:);
@@ -25,14 +25,14 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
         PCH4 = PPT(1); PCO2 = PPT(2); PCO = PPT(3); 
         PH2  = PPT(4); PH2O = PPT(5);  
         T    = Tbe(i);
-        a        = activityFcn( Cc, Global);   
-        r1(i)    = r1DRMFcn(PCH4, PCO2, PCO, PH2, kinetic, T)*a; % ========> aqui quedamos, falta arreglar los otros factores y hacer reverso
-        r2(i)    = r2RWGSFcn(PCO2,PCO,PH2,PH2O,Global)*a;
-        r3(i)    = r3MCFcn(PCH4,PH2,Global)*a;
-        rCoke(i) = rCokeFcn(Cc,PCH4,PCO2,PCO,PH2,Global)*a;
+        a        = activityFcn( Cc, kinetic);   
+        r1(i)    = r1DRMFcn(PCH4, PCO2, PCO, PH2, kinetic, T)*a;
+        r2(i)    = r2RWGSFcn(PCO2, PCO, PH2, PH2O, kinetic, T)*a;
+        r3(i)    = r3MCFcn(PCH4, PH2, kinetic, T)*a;
+        rCoke(i) = rCokeFcn(Cc, PCH4, PCO2, PCO, PH2, kinetic, T)*a;
 
     end
-
+% -------------------------------------------------------------------------
     if     strcmp(caracter2,'CH4')
             cinetica =  -r1 - r3;
     elseif strcmp(caracter2,'CO2')

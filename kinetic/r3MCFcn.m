@@ -1,20 +1,50 @@
-function r3 = r3MCFcn( PCH4, PH2, Global ) 
+function r3 = r3MCFcn( PCH4, PH2, kinetic, T ) 
+% -------------------------------------------------------------------------
+    % r3MCFcn - is a function that calculates the reaction rate of 
+    % the methane cracking reaction MC
+    % ----------------------------| input |--------------------------------
+    %     PCH4-PH2 = partial pressures of gases                       [bar] 
+    %     kinetic = a structure that contains the kinetic constants
+    %           T = phase temperature                                   [K]
+    % -----
+    %     R = 8.314472e-3; % Universal Gas Constant               [kJ/molK] 
+    %    Tc = reference temperature                                     [K]
+    %    k3o-Ea3-KH2o-EaKH2-KCH4o-EaKCH4-KP3o-EaKP3 = kinetic constants 
+    % ----------------------------| output |-------------------------------
+    %   r3 = the reaction rate of MC                           [mol/gcat s]
+% -------------------------------------------------------------------------
 
+    R      = kinetic.R;
+    Tc     = kinetic.Tc;
+    k3o    = kinetic.k3o;
+    Ea3    = kinetic.Ea3;
+    KH2o   = kinetic.KH2o;
+    EaKH2  = kinetic.EaKH2;
+    KCH4o  = kinetic.KCH4o;
+    EaKCH4 = kinetic.EaKCH4;
+    KP3o   = kinetic.KP3o;
+    EaKP3  = kinetic.EaKP3;
 
-    % -------------------- MODELO CRACKING METANO -----------------------------
-        % -------------------- MODELO CRACKING METANO -----------------------------
+% -------------------------------------------------------------------------
 
-    k3      = Global.k3;
-    KH2     = Global.KH2;
-    KCH4    = Global.KCH4;
-    KP3     = Global.KP3;
+    k3   =   k3o*exp((-Ea3/R)  *((1/T)-(1/Tc)));
+    KH2  =  KH2o*exp((EaKH2/R) *((1/T)-(1/Tc)));
+    KCH4 = KCH4o*exp((EaKCH4/R)*((1/T)-(1/Tc)));
+    KP3  =  KP3o*exp((-EaKP3/R)*((1/T)-(1/Tc)));
+
+% -------------------------------------------------------------------------
+
     factor1 = KP3*PCH4;
     factor2 = PH2^2/factor1;
+
     if factor1 == 0, factor2 = 0; end
     factor3     = KH2^(-1.5);
     factor4     = (PH2^(1.5))/factor3;
+
     if factor3 == 0, factor4 = 0; end
     if ~isreal(factor4), factor4 = 0; end
+
     r3          = ((k3*KCH4*PCH4)/(1+KCH4*PCH4+factor4)^2)*(1-factor2);
 
+% -------------------------------------------------------------------------
 end
