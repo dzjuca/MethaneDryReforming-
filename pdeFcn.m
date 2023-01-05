@@ -10,15 +10,12 @@ function ut = pdeFcn(t,u,Global)
   %      ut =  time-dependent terms variation, specified as a vector
 % -------------------------------------------------------------------------
 % --------------------| constants values |---------------------------------
-global ncall 
-
+    global ncall 
 
     persistent ncall_2
     if isempty(ncall_2)
         ncall_2 = 0;
     end
-
-
 
     zg      = Global.zg;
     fw      = Global.fw;
