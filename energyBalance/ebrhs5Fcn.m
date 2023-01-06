@@ -1,6 +1,7 @@
 function ebrhs5 = ebrhs5Fcn(alpha, Global, Tb, Te, ub)
 % -------------------------------------------------------------------------
-  % ebrhs5Fcn function 
+  % ebrhs5Fcn function calculates the right-hand side term-5 of the
+  % energy balance equation for the bubble phase. 
   % ----------------------------| input |----------------------------------
   %   alpha = fraction of bubbles in bed                                 []
   %  Global = constant values structure 

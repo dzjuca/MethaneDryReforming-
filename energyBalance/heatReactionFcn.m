@@ -2,15 +2,19 @@ function heatReaction = heatReactionFcn(reaction, To, T, R, hcc)
 % -------------------------------------------------------------------------
   % heatReaction function 
   % ----------------------------| input |----------------------------------
-  % reaction = reaction-values structure                                 []
-  %       To = standar temperature                                      [K]
-  %        T =  bubble|emulsion temperature                             [K]
-  %        R = Universal Gas Constant                            [kJ/mol K] 
-  %      hcc = heat capacity constants for each species                  []
+  %  reaction = reaction-values structure                                []
+  %        To = standar temperature                                     [K]
+  %         T =  bubble|emulsion temperature                            [K]
+  %         R = Universal Gas Constant                           [kJ/mol K] 
+  %       hcc = heat capacity constants for each species                 []
   % -----
-
-
-  
+  %         r = number of reactants                                      []
+  %         p = number of products                                       []
+  %      stqR = stoichiometric quantity of reactants                     []
+  %      stqP = stoichiometric quantity of products                      []
+  % reactants = reactants names                                          []
+  % products  = products names                                           []
+  % standarHR = standar heat reaction                              [KJ/mol] 
   % ----------------------------| output |---------------------------------
   %  heatReaction = heat reaction                                   [J/mol]
 % -------------------------------------------------------------------------

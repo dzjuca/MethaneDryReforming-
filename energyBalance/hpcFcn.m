@@ -19,9 +19,9 @@ function hpc = hpcFcn(alpha, Global, T, Cgas, db)
     % Cp_gas_mix = gas mixing heat capacity                       [J/mol K]
     % Cp_sol_mix = solid mixing heat capacity                   [J/g-cat K]
     %         kg = thermal conductivity for a gas mixture         [W/ cm K]
-    %         ks = thermal conductivity for a solid mixture       [W/ cm K] ========> revisar unidades
+    %         ks = thermal conductivity for a solid mixture       [W/ cm K]
     % ----------------------------| output |-------------------------------
-    %        hpc = the particle heat transfer coefficient          [xxxxxx] ========> revisar unidades
+    %        hpc = the particle heat transfer coefficient         [W/cm2 K]
 % -------------------------------------------------------------------------
     E          = Global.OHTC.E;
     m          = Global.OHTC.m;

@@ -9,10 +9,10 @@ function hr = hrFcn(Global, T)
     %     k_wall = emissivity of heat transfer surface                   []
     %     k_bed  = emissivity of the bed surface                         []
     % ----------------------------| output |-------------------------------
-    %        hr = the radiation heat transfer coefficient          [xxxxxx] ========> revisar unidades
+    %        hr = the radiation heat transfer coefficient         [W/cm2 K] 
 % -------------------------------------------------------------------------
 
-    sigma  = Global.OHTC.sigma;    
+    sigma  = (Global.OHTC.sigma)/10000;    
     k_wall = Global.OHTC.k_wall;      
     k_bed  = Global.OHTC.k_bed;    
     T_wall = Global.Twall;

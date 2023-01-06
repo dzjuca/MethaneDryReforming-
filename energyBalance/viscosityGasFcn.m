@@ -12,11 +12,11 @@ function mui = viscosityGasFcn( T, Tb, Tc, Pc, Vc, mu, M, k)
     % M   = molecular weight                                        [g/mol]
     % k   = factor correction, k = 0                                     []
     % ----------------------------| output |-------------------------------
-    % mui = viscosity of pure gas species                           [xxxxx]  % ==================> revisar valor
+    % mui = viscosity of pure gas species                          [g/cm s]
 % -------------------------------------------------------------------------
     Tbr = Tb/Tc;
     Tao = (1 - Tbr);
-    Tr  = T./Tc;                                      % ==================> revisar valor
+    Tr  = T./Tc;                                                             % ==================> revisar valor
 % -------------------------------------------------------------------------
     f0 = (- 5.97616*(Tao) + 1.29874*(Tao)^(1.5) ...
           - 0.60394*(Tao)^(2.5) - 1.06841*(Tao)^(5))/Tbr;

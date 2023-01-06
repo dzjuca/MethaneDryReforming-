@@ -1,6 +1,7 @@
 function ebrhs6 = ebrhs6Fcn(alpha, Global, T, Cgas, db)
 % -------------------------------------------------------------------------
-    % ebrhs6Fcn function 
+    % ebrhs6Fcn function calculates the right-hand side term-6 - emulsion
+    % phase 
     % ----------------------------| input |--------------------------------
     %    alpha = fraction of bubbles in bed                              []
     %   Global = constant values structure 

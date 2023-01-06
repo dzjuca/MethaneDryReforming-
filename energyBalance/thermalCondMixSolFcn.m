@@ -20,7 +20,7 @@ function ks_m = thermalCondMixSolFcn(Global, T)
     % mMolarNickel  = nickel molar mass                             [g/mol]
     % mMolarCeria   = ceria molar mass                              [g/mol]
     % ----------------------------| output |-------------------------------
-    %          ks_m = thermal conductivity for a gas mixture        [W/cmK]
+    %          ks_m = thermal conductivity for a gas mixture       [W/cm K]
 % -------------------------------------------------------------------------
 
     Dsol         = Global.Dcat;

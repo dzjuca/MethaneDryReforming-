@@ -1,6 +1,7 @@
 function ebrhs4 = ebrhs4Fcn(alpha, Global, Cgas_b, Cgas_e, Tb, Te, ub)
 % -------------------------------------------------------------------------
-  % ebrhs4Fcn function 
+  % ebrhs4Fcn function computes the right-hand side term-4 of the energy
+  % balance equation for the bubble phase. 
   % ----------------------------| input |----------------------------------
   %   alpha = fraction of bubbles in bed                                 []
   %  Global = constant values structure 

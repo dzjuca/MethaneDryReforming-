@@ -11,7 +11,7 @@ function hgc = hgcFcn(Global, T, Cgas, db)
     %         Ar = the arquimedes number                                 []
     %         kg = thermal conductivity for a gas mixture         [W/ cm K]
     % ----------------------------| output |-------------------------------
-    %        hgc = the gas convective heat transfer coefficient    [xxxxxx] ========> revisar unidades
+    %        hgc = the gas convective heat transfer coefficient   [W/cm2 K]
 % -------------------------------------------------------------------------
 
     dp    = Global.dparticle;

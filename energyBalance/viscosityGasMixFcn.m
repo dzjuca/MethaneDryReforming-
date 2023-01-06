@@ -7,7 +7,7 @@ function viscosityGasMix = viscosityGasMixFcn(Global, T, Cgas )
     %    Cgas = concentration vector of each species 
     %                                   (bubble|emulsion)         [mol/cm3]
     % ----------------------------| output |-------------------------------
-    % mum = viscosity of a mixing gases                           [xxxxx]  % ==================> revisar valor
+    %     mum = viscosity of a mixing gases                        [g/cm s]
 % -------------------------------------------------------------------------
     k_factor = Global.k_factor;
     n        = Global.gen;

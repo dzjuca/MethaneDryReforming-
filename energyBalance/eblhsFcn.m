@@ -10,7 +10,7 @@ function eblhs = eblhsFcn(alpha, Global, Cgas, T, identifier)
   % -----
   %      fw = fraction of wake in bubbles                                []
   %     Emf = minimum fluidization porosity                              []
-  %    Dsol = solid density                                         [g/cm3]
+  %    Dsol = solid density                                     [g-cat/cm3]
   %     gen = gas species number                                         []
   %     Cpg = gas mixing heat capacity                            [J/mol K]
   %     Cps = solid mixing heat capacity                        [J/g-cat K]
