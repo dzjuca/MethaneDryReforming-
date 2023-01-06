@@ -1,7 +1,7 @@
 % -------------------------------------------------------------------------
 % ------------------------ FLUIDIZED BED REACTOR --------------------------
 %                      DRY REFORMING OF METHANE (DRM)
-%                         ENERGY BALANCE SOLUTION
+%                         GLOBAL BALANCE SOLUTION
 %     Author: Daniel Z. Juca
 % ------------------------ | initiation | ---------------------------------
   close all
