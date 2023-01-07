@@ -18,7 +18,7 @@ function hgc = hgcFcn(Global, T, Cgas, db)
     Ar    = arquimedesFcn(Global, T, Cgas);
     kg    = thermalCondMixGasFcn(Global, T, Cgas); 
     tmp_1 = 0.3.*((Ar).^(0.39)).*kg;
-    tmp_2 = (dp.*db)^(1/2);
+    tmp_2 = (dp.*db).^(1/2);
 
     hgc   = tmp_1./tmp_2;
 % -------------------------------------------------------------------------

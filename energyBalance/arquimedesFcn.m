@@ -30,6 +30,8 @@ function arquimedes = arquimedesFcn(Global, T, Cgas)
     tmp_1 = g.*(dp^3).*(Dsol - D_gas_mix).*D_gas_mix;
     tmp_2 = mu_gas_mix.^2;
 
-    arquimedes = (tmp_1./tmp_2);
+           arquimedes = (tmp_1./tmp_2);
+                index = arquimedes < 0;
+    arquimedes(index) = 0;
 % ------------------------------------------------------------------------- 
 end

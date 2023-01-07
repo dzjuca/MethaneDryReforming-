@@ -27,9 +27,9 @@ function ks_m = thermalCondMixSolFcn(Global, T)
     tcAluminaFit = Global.tcAluminaFit;
     tcCeriaFit   = Global.tcCeriaFit;
     tcNickelFit  = Global.tcNickelFit;
-    tcAlumina    = tcAluminaFit(T)/100;
-    tcCeria      = tcCeriaFit(T)/100;
-    tcNickel     = tcNickelFit(T)/100;
+    tcAlumina    = tcAluminaFit(T)./100;
+    tcCeria      = tcCeriaFit(T)./100;
+    tcNickel     = tcNickelFit(T)./100;
     cAl2O3       = Global.cAl2O3;
     cNickel      = Global.cNickel;
     cCeria       = Global.cCeria;
@@ -44,7 +44,10 @@ function ks_m = thermalCondMixSolFcn(Global, T)
     m_total   = C_alumina + C_Ceria + C_nickel;
     yi        = [C_alumina, C_Ceria, C_nickel]./m_total;
     ksi       = [tcAlumina, tcCeria, tcNickel];
+    tmp_1     = yi./ksi; 
 
-         ks_m = 1/(sum(yi./ksi));
+           ks_m = 1./(sum(tmp_1, 2));
+          index = ks_m < 0;
+    ks_m(index) = 0;
 % -------------------------------------------------------------------------
 end
