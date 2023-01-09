@@ -5,7 +5,7 @@
 %     Author: Daniel Z. Juca
 % ------------------------ | initiation | ---------------------------------
   close all
-  clear
+  clear all
   clc
 % ---------- global constants ---------------------------------------------
      Global = globalData();
