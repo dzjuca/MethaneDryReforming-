@@ -27,10 +27,21 @@ function r3 = r3MCFcn( PCH4, PH2, kinetic, T )
 
 % -------------------------------------------------------------------------
 
-    k3   =   k3o*exp((-Ea3/R)  *((1/T)-(1/Tc)));
-    KH2  =  KH2o*exp((EaKH2/R) *((1/T)-(1/Tc)));
-    KCH4 = KCH4o*exp((EaKCH4/R)*((1/T)-(1/Tc)));
-    KP3  =  KP3o*exp((-EaKP3/R)*((1/T)-(1/Tc)));
+    tmp_K3  = exp((-Ea3/R)  *((1/T)-(1/Tc)));
+    if(isinf(tmp_K3)), tmp_K3 = 1; end
+    k3      =    k3o*tmp_K3;
+
+    tmp_KH2 = exp((EaKH2/R) *((1/T)-(1/Tc)));
+    if(isinf(tmp_KH2)), tmp_KH2 = 1; end
+    KH2     =  KH2o*tmp_KH2;
+
+    tmp_KCH4 = exp((EaKCH4/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_KCH4)), tmp_KCH4 = 1; end
+    KCH4     = KCH4o*tmp_KCH4;
+
+    tmp_KP3 = exp((-EaKP3/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_KP3)), tmp_KP3 = 1; end
+    KP3     =  KP3o*tmp_KP3;
 
 % -------------------------------------------------------------------------
 

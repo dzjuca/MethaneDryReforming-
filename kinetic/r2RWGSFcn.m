@@ -26,10 +26,21 @@ function r2 = r2RWGSFcn( PCO2, PCO, PH2, PH2O, kinetic, T )
     EaKH2  = kinetic.EaKH2;
 % -------------------------------------------------------------------------
 
-    k2   =   k2o*exp((-Ea2/R)  *((1/T)-(1/Tc)));
-    KP2  =  KP2o*exp((-EaKP2/R)*((1/T)-(1/Tc))); 
-    KCO2 = KCO2o*exp((EaKCO2/R)*((1/T)-(1/Tc)));
-    KH2  =  KH2o*exp((EaKH2/R) *((1/T)-(1/Tc)));
+    tmp_k2 = exp((-Ea2/R)  *((1/T)-(1/Tc)));
+    if(isinf(tmp_k2)), tmp_k2 = 1; end
+    k2   =   k2o*tmp_k2;
+
+    tmp_KP2 = exp((-EaKP2/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_KP2)), tmp_KP2 = 1; end
+    KP2  =    KP2o*tmp_KP2; 
+
+    tmp_KCO2 = exp((EaKCO2/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_KCO2)), tmp_KCO2 = 1; end
+    KCO2 =     KCO2o*tmp_KCO2;
+
+    tmp_KH2 = exp((EaKH2/R) *((1/T)-(1/Tc)));
+    if(isinf(tmp_KH2)), tmp_KH2 = 1; end
+    KH2  =    KH2o*tmp_KH2;
 
 % -------------------------------------------------------------------------
     factor1 = KP2*PCO2*PH2;

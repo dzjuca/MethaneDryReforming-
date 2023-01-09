@@ -27,10 +27,21 @@ function r1 = r1DRMFcn( PCH4, PCO2, PCO, PH2, kinetic, T)
 
 % -------------------------------------------------------------------------
 
-    k1     = k1o*exp((-Ea1/R)  *((1/T)-(1/Tc)));
-    KCH4   = KCH4o*exp((EaKCH4/R)*((1/T)-(1/Tc)));
-    KCO2   = KCO2o*exp((EaKCO2/R)*((1/T)-(1/Tc)));
-    KP1    = KP1o*exp((-EaKP1/R)*((1/T)-(1/Tc)));
+    tmp_k1 = exp((-Ea1/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_k1)), tmp_k1 = 1; end
+    k1     = k1o*tmp_k1;
+
+    tmp_KCH4 = exp((EaKCH4/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_KCH4)), tmp_KCH4 = 1; end
+    KCH4     = KCH4o*tmp_KCH4;
+
+    tmp_KCO2 = exp((EaKCO2/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_KCO2)), tmp_KCO2 = 1; end
+    KCO2     = KCO2o*tmp_KCO2;
+
+    tmp_KP1 = exp((-EaKP1/R)*((1/T)-(1/Tc)));
+    if(isinf(tmp_KP1)), tmp_KP1 = 1; end
+    KP1     = KP1o*tmp_KP1;
 
 % -------------------------------------------------------------------------
 
