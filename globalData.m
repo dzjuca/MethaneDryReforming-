@@ -83,6 +83,7 @@ function Global = globalData()
       Global.kinetic.Tref  = (475.0 + 273.15); % reference temperature  [K]
       Global.kinetic.Tc    = (512.5 + 273.15); % reference temperature  [K]
       Global.kinetic.CcMax = 0.3051;% max coke concentration [g.coke/g.cat]
+      Global.kinetic.Tpro  = (525.0 + 273.15); % Temperature-process    [K]
 % ---------- kinetic constants - pre-exponential factor -------------------
       Global.kinetic.k1o = (10.87270/3600);      % - DRM       [mol/gcat.s]
       Global.kinetic.k2o = (716.0353/3600);      % - WGSR      [mol/gcat.s]

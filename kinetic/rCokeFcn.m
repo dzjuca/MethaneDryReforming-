@@ -16,6 +16,8 @@ function rCoke = rCokeFcn( Cc, PCH4, PCO2, PCO, PH2, kinetic, T )
     % ----------------------------| output |-------------------------------
     %   rCoke = the reaction rate of coke formation        [g-coke/g-cat s]
 % -------------------------------------------------------------------------
+    if (T < 100), T = kinetic.Tpro; end
+% -------------------------------------------------------------------------
     R      = kinetic.R;
     Tc     = kinetic.Tc;
     CcMax  = kinetic.CcMax;
@@ -36,26 +38,32 @@ function rCoke = rCokeFcn( Cc, PCH4, PCO2, PCO, PH2, kinetic, T )
     tmp_KD1 = exp((-EaKD1/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KD1)), tmp_KD1 = 1; end
     KD1     = KD1o*tmp_KD1;
+    %Global.KD1  = KD1o*exp((-EaKD1/Global.R) *((1/Global.T)-(1/Global.Tc)));
 
     tmp_KD2 = exp((-EaKD2/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KD2)), tmp_KD2 = 1; end
     KD2     = KD2o*tmp_KD2;
+    %Global.KD2  = KD2o*exp((-EaKD2/Global.R) *((1/Global.T)-(1/Global.Tc)));
 
     tmp_KR1 = exp((-EaKR1/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KR1)), tmp_KR1 = 1; end
     KR1     = KR1o*tmp_KR1;
+    %Global.KR1  = KR1o*exp((-EaKR1/Global.R) *((1/Global.T)-(1/Global.Tc)));
 
-    tmp_KAD1 = exp((-EaKAD1/R) *((1/T)-(1/Tc)));
+    tmp_KAD1 = exp((EaKAD1/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KAD1)), tmp_KAD1 = 1; end
     KAD1     = KAD1o*tmp_KAD1;
+    %Global.KAD1 = KAD1o*exp((EaKAD1/Global.R)*((1/Global.T)-(1/Global.Tc)));
 
-    tmp_KAD2 = exp((-EaKAD2/R) *((1/T)-(1/Tc)));
+    tmp_KAD2 = exp((EaKAD2/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KAD2)), tmp_KAD2 = 1; end
     KAD2     = KAD2o*tmp_KAD2;
+    %Global.KAD2 = KAD2o*exp((EaKAD2/Global.R)*((1/Global.T)-(1/Global.Tc)));
 
-    tmp_KAD3 = exp((-EaKAD3/R) *((1/T)-(1/Tc)));
+    tmp_KAD3 = exp((EaKAD3/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KAD3)), tmp_KAD3 = 1; end
     KAD3     = KAD3o*tmp_KAD3;
+    %Global.KAD3 = KAD3o*exp((EaKAD3/Global.R)*((1/Global.T)-(1/Global.Tc)));
 % -------------------------------------------------------------------------
     FId    = (KD1*KAD1*PCH4^2 + KD2*KAD2*PCO^2*PH2^2)/((1 + KAD3*PCO2)^2);    
     FIr    = (KR1*KAD3*PCO2)/(1+KAD3*PCO2); 

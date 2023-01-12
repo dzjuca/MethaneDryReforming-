@@ -14,6 +14,10 @@ function r3 = r3MCFcn( PCH4, PH2, kinetic, T )
     %   r3 = the reaction rate of MC                           [mol/gcat s]
 % -------------------------------------------------------------------------
 
+    if (T < 100), T = kinetic.Tpro; end
+
+% -------------------------------------------------------------------------
+
     R      = kinetic.R;
     Tc     = kinetic.Tc;
     k3o    = kinetic.k3o;
@@ -30,18 +34,22 @@ function r3 = r3MCFcn( PCH4, PH2, kinetic, T )
     tmp_K3  = exp((-Ea3/R)  *((1/T)-(1/Tc)));
     if(isinf(tmp_K3)), tmp_K3 = 1; end
     k3      =    k3o*tmp_K3;
+    %Global.k3   =   k3o*exp((-Ea3/Global.R)  *((1/Global.T)-(1/Global.Tc)));
 
     tmp_KH2 = exp((EaKH2/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KH2)), tmp_KH2 = 1; end
     KH2     =  KH2o*tmp_KH2;
+    %Global.KH2  =  KH2o*exp((EaKH2/Global.R) *((1/Global.T)-(1/Global.Tc)));
 
     tmp_KCH4 = exp((EaKCH4/R)*((1/T)-(1/Tc)));
     if(isinf(tmp_KCH4)), tmp_KCH4 = 1; end
     KCH4     = KCH4o*tmp_KCH4;
+    %Global.KCH4 = KCH4o*exp((EaKCH4/Global.R)*((1/Global.T)-(1/Global.Tc)));
 
     tmp_KP3 = exp((-EaKP3/R)*((1/T)-(1/Tc)));
     if(isinf(tmp_KP3)), tmp_KP3 = 1; end
     KP3     =  KP3o*tmp_KP3;
+    %Global.KP3  =  KP3o*exp((-EaKP3/Global.R)*((1/Global.T)-(1/Global.Tc)));
 
 % -------------------------------------------------------------------------
 

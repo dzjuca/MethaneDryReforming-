@@ -14,6 +14,10 @@ function r2 = r2RWGSFcn( PCO2, PCO, PH2, PH2O, kinetic, T )
     %   r2 = the reaction rate of RWGS                         [mol/gcat s]
 % -------------------------------------------------------------------------
 
+    if (T < 100), T = kinetic.Tpro; end
+        
+% -------------------------------------------------------------------------
+
     R      = kinetic.R;
     Tc     = kinetic.Tc;
     k2o    = kinetic.k2o;
@@ -29,18 +33,22 @@ function r2 = r2RWGSFcn( PCO2, PCO, PH2, PH2O, kinetic, T )
     tmp_k2 = exp((-Ea2/R)  *((1/T)-(1/Tc)));
     if(isinf(tmp_k2)), tmp_k2 = 1; end
     k2   =   k2o*tmp_k2;
+    %Global.k2   =   k2o*exp((-Ea2/Global.R)  *((1/Global.T)-(1/Global.Tc)));
 
     tmp_KP2 = exp((-EaKP2/R)*((1/T)-(1/Tc)));
     if(isinf(tmp_KP2)), tmp_KP2 = 1; end
     KP2  =    KP2o*tmp_KP2; 
+    %Global.KP2  =  KP2o*exp((-EaKP2/Global.R)*((1/Global.T)-(1/Global.Tc))); 
 
     tmp_KCO2 = exp((EaKCO2/R)*((1/T)-(1/Tc)));
     if(isinf(tmp_KCO2)), tmp_KCO2 = 1; end
     KCO2 =     KCO2o*tmp_KCO2;
+    %Global.KCO2 = KCO2o*exp((EaKCO2/Global.R)*((1/Global.T)-(1/Global.Tc)));
 
     tmp_KH2 = exp((EaKH2/R) *((1/T)-(1/Tc)));
     if(isinf(tmp_KH2)), tmp_KH2 = 1; end
     KH2  =    KH2o*tmp_KH2;
+    %Global.KH2  =  KH2o*exp((EaKH2/Global.R) *((1/Global.T)-(1/Global.Tc)));
 
 % -------------------------------------------------------------------------
     factor1 = KP2*PCO2*PH2;
