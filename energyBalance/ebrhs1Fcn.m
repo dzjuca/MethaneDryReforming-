@@ -40,21 +40,21 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes, identifier)
 
       temporal_1 = ((alpha + alpha.*fw.*Emf).*Cpg.*Cg.*ubes);
       temporal_2 = (alpha.*fw.*(1 - Emf).*Dsol.*ubes.*Cps);
+      temporal_3 = (temporal_1 + temporal_2).*T;
 
     elseif strcmp( identifier, 'emulsion')
 
-      temporal_1 = ((1 - alpha - alpha.*fw).*Emf.*Cpg.*Cg.*ubes(1));
-      temporal_2 = ((1 - alpha - alpha.*fw).*(1 - Emf).*Dsol.*ubes(2).*Cps);
+      temporal_1 = ((1 - alpha - alpha.*fw).*Emf.*Cpg.*Cg.*ubes(:,1));
+      temporal_2 = ((1 - alpha - alpha.*fw).*(1 - Emf).*Dsol.*ubes(:,2).*Cps);
+      temporal_3 = (temporal_1 - temporal_2).*T;
 
     else
   
       disp('Error - ebrhs1Fcn function - identifier')
   
     end
-
-    dTdz = dss004(zl,zu,n,T)';
-    ebrhs1     = (temporal_1 + temporal_2).*dTdz;
-
+    
+    dTdz       = dss004(zl,zu,n,temporal_3)';
+    ebrhs1     = dTdz;
 % -------------------------------------------------------------------------
-
 end
