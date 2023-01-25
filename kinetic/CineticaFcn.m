@@ -17,18 +17,22 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
     rCoke  = zeros(index1,1);
     kinetic = Global.kinetic;
 % -------------------------------------------------------------------------
-    if (strcmp(caracter2,'DRM')  || ...
-        strcmp(caracter2,'RWGS') || ...
-        strcmp(caracter2,'MC'))
 
-            T_be = Tbe;
+    T_be = Tbe;
 
-    else
-            
-            T_be    = zeros(index1,1);
-            T_be(:,1) = Global.Tbed;
-
-    end
+%     if (strcmp(caracter2,'DRM')  || ...
+%         strcmp(caracter2,'RWGS') || ...
+%         strcmp(caracter2,'MC'))
+% 
+%             T_be = Tbe;
+% 
+%     else
+%             
+%             T_be    = zeros(index1,1);
+%             T_be(:,1) = Global.Tbed;
+%             T_be = Tbe;
+% 
+%     end
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
     for  i = 1:index1 
