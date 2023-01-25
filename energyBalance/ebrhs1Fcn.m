@@ -52,6 +52,7 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes, identifier)
       temporal_2 = ((1 - alpha - alpha.*fw).*(1 - Emf).*Cps.*Dsol.*ubes(:,2)).*T;
       v2         = -1;
       dTdz_2     = dss020(zl,zu,n,temporal_2, v2)';
+      
       dTdz       = dTdz_1 - dTdz_2;
 
     else
