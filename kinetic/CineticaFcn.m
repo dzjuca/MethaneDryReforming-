@@ -17,6 +17,20 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
     rCoke  = zeros(index1,1);
     kinetic = Global.kinetic;
 % -------------------------------------------------------------------------
+    if (strcmp(caracter2,'DRM')  || ...
+        strcmp(caracter2,'RWGS') || ...
+        strcmp(caracter2,'MC'))
+
+            T_be = Tbe;
+
+    else
+            
+            T_be    = zeros(index1,1);
+            T_be(:,1) = Global.Tbed;
+
+    end
+% -------------------------------------------------------------------------
+% -------------------------------------------------------------------------
     for  i = 1:index1 
 
         CT   = Cgas(i,:);
@@ -24,7 +38,7 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
         PPT  = partialPressureFcn(CT(1:6));
         PCH4 = PPT(1); PCO2 = PPT(2); PCO = PPT(3); 
         PH2  = PPT(4); PH2O = PPT(5);  
-        T    = Tbe(i);
+        T    = T_be(i);
         a        = activityFcn( Cc, kinetic);   
         r1(i)    = r1DRMFcn(PCH4, PCO2, PCO, PH2, kinetic, T)*a;
         r2(i)    = r2RWGSFcn(PCO2, PCO, PH2, PH2O, kinetic, T)*a;

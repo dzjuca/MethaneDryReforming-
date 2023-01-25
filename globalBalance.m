@@ -14,7 +14,7 @@
          u0 = initialConditions(Global);
 % ---------- time simulation (s) ------------------------------------------
     t0 = 0.0; 
-    tf = 3600*0.5; 
+    tf = 30; 
   tout = linspace(t0,tf,100)';
 % ---------- Implicit (sparse stiff) integration --------------------------
    reltol = 1.0e-6; abstol = 1.0e-6;  
@@ -23,6 +23,4 @@
   options = odeset(options,'JPattern',S); 
  pdeModel = @(t,u)pdeFcn(t,u,Global);
     [t,u] = ode15s(pdeModel,tout,u0,options);  
-% ---------- Salidas ------------------------------------------------------
-% [T_b,T_e,T] = SkinFcnMac(t,u);
 % ---------------------------| End Program |-------------------------------

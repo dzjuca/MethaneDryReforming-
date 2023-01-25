@@ -32,9 +32,10 @@ function ebrhs5 = ebrhs5Fcn(alpha, Global, Tb, Te, ub)
     n     = Global.n;
     Cps_b = cpSolMixFcn(Global, Tb);
     Cps_e = cpSolMixFcn(Global, Te);
+    v     = 1; 
 
     temporal_1     = (ub.*alpha.*fw.*(1 - Emf).*Dsol);
-    dtemporal_1dz  = dss004(zl,zu,n,temporal_1)'; 
+    dtemporal_1dz  = dss020(zl,zu,n,temporal_1, v)';
     index          = find(dtemporal_1dz < 0);
     lambda1        = zeros(n,1);
     lambda2        = ones(n,1);
