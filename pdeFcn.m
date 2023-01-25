@@ -172,7 +172,7 @@ function ut = pdeFcn(t,u,Global)
 % --------------------| Energy Balance - Temperature - Bubble Phase |------
 % ----- constant value ----------------------------------------------------
     idBP  = 'bubble';
-    EBCF1 = 1./eblhsFcn(alpha, Global, CTBW, u8b, idBP);
+    EBCF1 = 1./eblhsFcn( alpha, Global, CTBW, u8b, idBP);
     u8bt  = (- ebrhs1Fcn(alpha, Global, CTBW, u8b, ub, idBP)          ...
              + ebrhs2Fcn(alpha, Global, CTBW, CTE, u8b, u8e, ub, db)  ...
              + ebrhs3Fcn(alpha, Global, CTBW, u8b, idBP)              ...
@@ -224,7 +224,6 @@ function ut = pdeFcn(t,u,Global)
     for i = 1:index1, ut(i+(15*index1)) = u8et(i); end
 % --------------------| Number Calls To pdeFcn |---------------------------
     ncall   = ncall+1;
-    ncall_2 = ncall_2+1;
-    disp([ncall,ncall_2,t])
+    disp([ncall,t])
 % --------------------| pdeFcn - End |-------------------------------------
 end 

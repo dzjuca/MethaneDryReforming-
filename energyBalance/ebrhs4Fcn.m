@@ -38,9 +38,10 @@ function ebrhs4 = ebrhs4Fcn(alpha, Global, Cgas_b, Cgas_e, Tb, Te, ub)
     zl    = zg(1);
     zu    = zg(end);
     n     = Global.n;
+    v     = 1; 
 
     temporal_1     = (alpha + alpha.*fw.*Emf).*ub;
-    dtemporal_1dz  = dss004(zl,zu,n,temporal_1)';
+    dtemporal_1dz  = dss020(zl,zu,n,temporal_1, v)';
     index          = find(dtemporal_1dz < 0);
     lambda1        = zeros(n,1);
     lambda2        = ones(n,1);

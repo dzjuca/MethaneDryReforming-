@@ -23,6 +23,4 @@
   options = odeset(options,'JPattern',S); 
  pdeModel = @(t,u)pdeFcn(t,u,Global);
     [t,u] = ode15s(pdeModel,tout,u0,options);  
-% ---------- Salidas ------------------------------------------------------
-% [T_b,T_e,T] = SkinFcnMac(t,u);
 % ---------------------------| End Program |-------------------------------
