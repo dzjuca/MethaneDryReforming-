@@ -3,12 +3,13 @@ function Global = globalData()
 % globalData-function return a structure 'Global' with data constants
 % -------------------------------------------------------------------------
 % -------------------- | General Data |------------------------------------
+% Restore to: (525.0 + 273.15); 
       Global.R = 8.314472e-3;         % Universal Gas Constant    [kJ/molK]    
       Global.P = 1.01325;             % Pressure                      [bar]   
-      Global.T = 525.0 + 273.15;      % Temperature                     [K]
-      Global.Tinlet  = 525.0 + 273.15; % Temperature                    [K]
-      Global.Twall   = 525.0 + 273.15; % Temperature                    [K]
-      Global.Tbed    = 525.0 + 273.15; % Temperature                    [K]
+      Global.T       = 800;      % Temperature                     [K]
+      Global.Tinlet  = 800; ; % Temperature                    [K]
+      Global.Twall   = 800;  % Temperature                    [K]
+      Global.Tbed    = 800;  % Temperature                    [K]
       Global.g       = 981.0;          % Gravity                    [cm/s2]
       Global.Tref    = (475.0 + 273.15); % reference temperature        [K]
       Global.Tc      = (512.5 + 273.15); % reference temperature        [K]
@@ -122,23 +123,6 @@ function Global = globalData()
       Global.kinetic.EaKAD1 = (267.8376000);%                      [kJ/mol]
       Global.kinetic.EaKAD2 = (572.8522000);%                      [kJ/mol]
       Global.kinetic.EaKAD3 = (570.9836000);%                      [kJ/mol]
-% ---------- kinetic constants calculate  ---------------------------------
-  %Global.k1   =   k1o*exp((-Ea1/Global.R)  *((1/Global.T)-(1/Global.Tc)));
-  %Global.k2   =   k2o*exp((-Ea2/Global.R)  *((1/Global.T)-(1/Global.Tc)));
-  %Global.k3   =   k3o*exp((-Ea3/Global.R)  *((1/Global.T)-(1/Global.Tc)));
-  %Global.KCH4 = KCH4o*exp((EaKCH4/Global.R)*((1/Global.T)-(1/Global.Tc)));
-  %Global.KCO2 = KCO2o*exp((EaKCO2/Global.R)*((1/Global.T)-(1/Global.Tc)));
-  %Global.KH2  =  KH2o*exp((EaKH2/Global.R) *((1/Global.T)-(1/Global.Tc)));
-  %Global.KP1  =  KP1o*exp((-EaKP1/Global.R)*((1/Global.T)-(1/Global.Tc)));
-  %Global.KP2  =  KP2o*exp((-EaKP2/Global.R)*((1/Global.T)-(1/Global.Tc))); 
-  %Global.KP3  =  KP3o*exp((-EaKP3/Global.R)*((1/Global.T)-(1/Global.Tc)));
-% ----------- deactivation constants calculate ----------------------------        
-  %Global.KD1  = KD1o*exp((-EaKD1/Global.R) *((1/Global.T)-(1/Global.Tc)));
-  %Global.KD2  = KD2o*exp((-EaKD2/Global.R) *((1/Global.T)-(1/Global.Tc)));
-  %Global.KR1  = KR1o*exp((-EaKR1/Global.R) *((1/Global.T)-(1/Global.Tc)));
-  %Global.KAD1 = KAD1o*exp((EaKAD1/Global.R)*((1/Global.T)-(1/Global.Tc)));
-  %Global.KAD2 = KAD2o*exp((EaKAD2/Global.R)*((1/Global.T)-(1/Global.Tc)));
-  %Global.KAD3 = KAD3o*exp((EaKAD3/Global.R)*((1/Global.T)-(1/Global.Tc)));
 % ---------- molar mass for each specie -----------------------------------
       Global.MMASS(1) = 16.0426;      % - CH4                       [g/mol]
       Global.MMASS(2) = 44.0090;      % - CO2                       [g/mol]
