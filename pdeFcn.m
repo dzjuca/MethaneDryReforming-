@@ -80,6 +80,8 @@ function ut = pdeFcn(t,u,Global)
     u8e(1) = Tinlet;
 % ---------- z = Zg solid - wake & emulsion phases ------------------------
     u7e(index1) = u7w(index1);
+% ---------- z = Zg temperature bubble - wake & emulsion phases -----------
+    u8e(index1) = u8b(index1);
 % --------------------| Fluidized Bed |------------------------------------   
 % ---------- bubble - ubFcn.m ---------------------------------------------
     [ub,db,us,ue,alpha] = ubFcn(Global);    
@@ -204,6 +206,8 @@ function ut = pdeFcn(t,u,Global)
     u8et(1) = 0;
 % ---------- z = Zg solid - wake & emulsion phase -------------------------
     u7et(index1) = u7wt(index1);
+% ---------- z = Zg temperature bubble - wake & emulsion phases -----------
+    u8et(index1) = u8bt(index1);
 % --------------------| Temporal Variation Vector dudt |-------------------
     ut    = zeros((Num_esp*index1),1);
     for i = 1:index1, ut(i+(0*index1))  = u1bt(i); end

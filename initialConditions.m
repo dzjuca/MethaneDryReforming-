@@ -56,9 +56,9 @@ function u = initialConditions(Global)
     % ---------- u6e = N2 emulsion --------------------------------------------
         for i = 1:n, u6e(i) = 1e-7;    u(i+11*n) = u6e(i);    end
     % ---------- u7w = Coke wake ----------------------------------------------
-        for i = 1:n, u7w(i) = 1e-7;    u(i+12*n) = u7w(i);    end
+        for i = 1:n, u7w(i) = 0.00;    u(i+12*n) = u7w(i);    end
     % ---------- u7e = Coke emulsion ------------------------------------------
-        for i = 1:n, u7e(i) = 1e-7;    u(i+13*n) = u7e(i);    end
+        for i = 1:n, u7e(i) = 0.00;    u(i+13*n) = u7e(i);    end
     % ---------- u8b = Temperature Bubble & Wake phases -----------------------
         for i = 1:n, u8b(i) = T0;      u(i+14*n) = u8b(i);    end
     % ---------- u8b = Temperature Emulsion phase -----------------------------

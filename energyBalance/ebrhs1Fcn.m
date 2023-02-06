@@ -42,16 +42,19 @@ function ebrhs1 = ebrhs1Fcn(alpha, Global, Cgas, T, ubes, identifier)
       temporal_2 = (alpha.*fw.*(1 - Emf).*Dsol.*ubes.*Cps);
       temporal_3 = (temporal_1 + temporal_2).*T;
       v          = 1;
-      dTdz       = dss020(zl,zu,n,temporal_3,v)';
+      % dTdz     = dss020(zl,zu,n,temporal_3,v)';
+        dTdz     = dss012(zl,zu,n,temporal_3,v);
 
     elseif strcmp( identifier, 'emulsion')
 
       temporal_1 = ((1 - alpha - alpha.*fw).*Emf.*Cpg.*Cg.*ubes(:,1)).*T;
       v1         = 1;
-      dTdz_1     = dss020(zl,zu,n,temporal_1, v1)';
+      % dTdz_1   = dss020(zl,zu,n,temporal_1, v1)';
+        dTdz_1   = dss012(zl,zu,n,temporal_1, v1);
       temporal_2 = ((1 - alpha - alpha.*fw).*(1 - Emf).*Cps.*Dsol.*ubes(:,2)).*T;
       v2         = -1;
-      dTdz_2     = dss020(zl,zu,n,temporal_2, v2)';
+      % dTdz_2   = dss020(zl,zu,n,temporal_2, v2)';
+      dTdz_2     = dss012(zl,zu,n,temporal_2, v2);
       
       dTdz       = dTdz_1 - dTdz_2;
 

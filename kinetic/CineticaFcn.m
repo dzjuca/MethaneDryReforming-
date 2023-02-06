@@ -18,19 +18,20 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
     kinetic = Global.kinetic;
 % -------------------------------------------------------------------------
 
-%     T_be = Tbe;
+   % T_be = Tbe;
 
-    if (strcmp(caracter2,'DRM')  || ...
-        strcmp(caracter2,'RWGS') || ...
-        strcmp(caracter2,'MC'))
+     if (strcmp(caracter2,'DRM')  || ...
+         strcmp(caracter2,'RWGS') || ...
+         strcmp(caracter2,'MC'))
+ 
+             T_be = Tbe;
+ 
+     else
+             
+             T_be    = zeros(index1,1);
+             T_be(:,1) = Global.Tbed;
 
-            T_be = Tbe;
-
-    else
-            
-            T_be      = zeros(index1,1);
-            T_be(:,1) = Global.Tbed;
-
+ 
     end
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
@@ -63,7 +64,8 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
     elseif strcmp(caracter2, 'N2')
             cinetica = 0;
     elseif strcmp(caracter2, 'Cc')
-            cinetica = rCoke;
+            % cinetica = rCoke;
+            cinetica = 0;
     elseif strcmp(caracter2, 'DRM')
             cinetica = r1;
     elseif strcmp(caracter2, 'RWGS')
