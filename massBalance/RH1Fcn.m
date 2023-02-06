@@ -22,19 +22,23 @@ function RH1 = RH1Fcn(alpha,ubes,Ci,Global,caracter)
        if     strcmp(caracter,'FGBurbuja')
               temporal = (alpha+alpha*fw*Emf).*ubes.*Ci;
                      % RH1 = dss004(xl,xu,n,temporal)';
-                     RH1 = dss020(xl,xu,n,temporal, 1)';
+                     % RH1 = dss020(xl,xu,n,temporal, 1)';
+                       RH1 = dss012(xl,xu,n,temporal, 1);
        elseif strcmp(caracter,'FGEmulsion')
               temporal = (1-alpha-alpha*fw)*Emf.*ubes.*Ci;
                      % RH1 = dss004(xl,xu,n,temporal)';
-                     RH1 = dss020(xl,xu,n,temporal, 1)';
+                     % RH1 = dss020(xl,xu,n,temporal, 1)';
+                       RH1 = dss012(xl,xu,n,temporal, 1);
        elseif strcmp(caracter,'FSEstela')
               temporal = Dcat*(1-Emf)*alpha*fw.*ubes.*Ci;
                      % RH1 = dss004(xl,xu,n,temporal)';
-                     RH1 = dss020(xl,xu,n,temporal, 1)';
+                     % RH1 = dss020(xl,xu,n,temporal, 1)';
+                       RH1 = dss012(xl,xu,n,temporal, 1);
        elseif strcmp(caracter,'FSEmulsion')
               temporal = (1-alpha-alpha*fw)*(1-Emf)*Dcat.*ubes.*Ci;
                      % RH1 = dss004(xl,xu,n,temporal)';
-                     RH1 = dss020(xl,xu,n,temporal, -1)';
+                     % RH1 = dss020(xl,xu,n,temporal, -1)';
+                       RH1 = dss012(xl,xu,n,temporal, -1);
        else
               disp('Error - Ingresar un caracter correcto RH1Fcn.m')
        end
