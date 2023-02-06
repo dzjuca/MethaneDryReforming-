@@ -16,7 +16,7 @@ function a = activityFcn( Cc, kinetic )
 
     a     = (1-(Cc/CcMax))^2;
 
-    if ncall > 0 % 497
+    if ncall > 498
         if Cc > CcMax, a = 0; end
         if Cc < 0,     a = 1; end
     end
