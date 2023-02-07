@@ -6,8 +6,8 @@ function Global = globalData()
 % Restore to: (525.0 + 273.15); 
       Global.R = 8.314472e-3;         % Universal Gas Constant    [kJ/molK]    
       Global.P = 1.01325;             % Pressure                      [bar]   
-      Global.T       = 800;      % Temperature                     [K]
-      Global.Tinlet  = 800; ; % Temperature                    [K]
+      Global.T       = 800;  % Temperature                    [K]
+      Global.Tinlet  = 800;  % Temperature                    [K]
       Global.Twall   = 800;  % Temperature                    [K]
       Global.Tbed    = 800;  % Temperature                    [K]
       Global.g       = 981.0;          % Gravity                    [cm/s2]
@@ -291,8 +291,8 @@ function Global = globalData()
                            0.632e-11];           
       Global.HR.HCC.N2  = [3.539, -0.261e-3, 0.007e-5, 0.157e-8,  ...
                            -0.099e-11]; 
-      Global.HR.HCC.Graphite  = [2.9708, 0.1498, -0.0770, 0.0201, ...
-                                 -0.0359, 0.0713, -0.0290];
+      Global.HR.HCC.Graphite  = [-0.8022, 0.008107, -7.727e-06, 4.032e-09, ...
+                                 -1.183e-12, 1.829e-16, -1.159e-20];
 % ---------- dry reforming of methane -------------------------------------
       Global.HR.reactions.DRM.nReactans    = 2;
       Global.HR.reactions.DRM.nProducts    = 2;

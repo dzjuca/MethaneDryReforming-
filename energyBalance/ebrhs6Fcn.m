@@ -22,7 +22,7 @@ function ebrhs6 = ebrhs6Fcn(alpha, Global, T, Cgas, db)
     Twall   = Global.Twall;
     C_gas_i = Cgas(:,1:gen);
 
-          U = overallHTCFcn(alpha, Global, T, C_gas_i, db);
+          U = (overallHTCFcn(alpha, Global, T, C_gas_i, db)).*1;
 
     ebrhs6  = U.*(Twall - T)./Hd;
 % -------------------------------------------------------------------------

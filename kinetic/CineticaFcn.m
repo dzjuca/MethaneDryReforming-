@@ -18,6 +18,7 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
     kinetic = Global.kinetic;
 % -------------------------------------------------------------------------
      T_be = Tbe;
+
 %      if (strcmp(caracter2,'DRM')  || ...
 %          strcmp(caracter2,'RWGS') || ...
 %          strcmp(caracter2,'MC'))
