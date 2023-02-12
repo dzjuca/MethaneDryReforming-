@@ -62,8 +62,8 @@ function cinetica = CineticaFcn(Cgas, Global, Tbe, caracter2)
     elseif strcmp(caracter2, 'N2')
             cinetica = 0;
     elseif strcmp(caracter2, 'Cc')
-            % cinetica = rCoke;
-            cinetica = 0;
+            cinetica = rCoke;
+            % cinetica = 0;
     elseif strcmp(caracter2, 'DRM')
             cinetica = r1;
     elseif strcmp(caracter2, 'RWGS')
