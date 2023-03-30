@@ -50,4 +50,7 @@ function ks_m = thermalCondMixSolFcn(Global, T)
           index = ks_m < 0;
     ks_m(index) = 0;
 % -------------------------------------------------------------------------
+% borrar
+% ks_m(:,1) = 0.3;
+
 end

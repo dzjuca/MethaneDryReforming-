@@ -99,4 +99,6 @@ function kg = thermalCondMixGasFcn(Global, T_z, Cgas)
 
     end
 % -------------------------------------------------------------------------
+% borrar
+%   kg(:,1) = 1e-3;
 end
