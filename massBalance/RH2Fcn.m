@@ -43,8 +43,8 @@ function RH2 = RH2Fcn(alpha,ub,CiBW,CiE,Global,caracter)
      elseif strcmp(caracter,'FSolido')
             temporal1 = (1-Emf)*alpha*fw.*ub*Dcat;
             % temporal2 = dss004(xl,xu,n,temporal1)';
-            % temporal2 = dss020(xl,xu,n,temporal1, 1)';
-              temporal2 = dss012(xl,xu,n,temporal1, 1);
+              temporal2 = dss020(xl,xu,n,temporal1, 1)';
+            % temporal2 = dss012(xl,xu,n,temporal1, 1);
             for i = 1:n
                 if      temporal2(i) < 0
                           lambda1(i) = 1;
